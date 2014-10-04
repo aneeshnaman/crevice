@@ -32,8 +32,11 @@ function handleEvent(e) {
     return;
   } else {
     if (hasKeyStartingWith(ACTION_MAP, id)) {
+      // something more can happen, wait...
       return;
     }
+    // nothing more can happen. now see if any suffix of the current event-seq
+    // is a valid key combo, and execute that.
     for (var i = 1; i < gEvents.length; ++i) {
       var slice = gEvents.slice(i);
       var id = chainId(slice);
