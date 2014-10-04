@@ -1,3 +1,4 @@
+function time(e) { return e.timeStamp; }
 function ctrl(e) { return e.ctrlKey; }
 function alt(e) { return e.altKey; }
 function shift(e) { return e.shiftKey; }
@@ -13,12 +14,10 @@ function keyId(e) {
   return id;
 }
 
-function chainId(/* multiple events */) {
+function chainId(events) {
   var KEY_SEPARATOR = "_";
 
   var components = [];
-  Array.prototype.slice.call(arguments).forEach(function(e) {
-    components.push(keyId(e));
-  });
+  events.forEach(function(e) { components.push(keyId(e)); });
   return components.join(KEY_SEPARATOR);
 }

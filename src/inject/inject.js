@@ -8,46 +8,39 @@ function log() {
   if (ENABLE_LOGGING) console.log(arguments);
 }
 
-function addChainedListener(e1) {
-  if (currentlyInChain) return;
-
-  var chainListener = function(e) {
-    handleEvent(e1, e);
-    log("removing chain listener at evaluate");
-    document.removeEventListener(EVENT_KEYPRESS, chainListener);
-    currentlyInChain = false;
-  };
-  log("adding chain listener");
-  document.addEventListener(EVENT_KEYPRESS, chainListener);
-  currentlyInChain = true;
-
-  var timeoutID = window.setTimeout(function() {
-    log("removing chain listener");
-    document.removeEventListener(EVENT_KEYPRESS, chainListener);
-    currentlyInChain = false;
-  }, CHAIN_TIMEOUT_MS);
-}
-
 function executeAction(id) {
   var action = ACTION_MAP[id];
   if (action) {
-    action.apply(this, arguments);
+    action.call(this, id);
     return true;
   }
   return false;
 }
 
-function handleEvent(/* multiple events */) {
-  log(arguments);
-  var id = chainId.apply(this, arguments);
-  log(id);
-  if (executeAction(id)) return;
+var gEvents = [];
 
-  var id = keyId(arguments[0]);
-  for (var chain in ACTION_MAP) {
-    if (chain.indexOf(id) == 0) {
-      addChainedListener(arguments[0]);
+function handleEvent(e) {
+  if (gEvents.length > 0 && (now() - time(last(gEvents))) > CHAIN_TIMEOUT_MS) {
+    gEvents = [];
+  }
+
+  gEvents.push(e);
+  var id = chainId(gEvents);
+  log(gEvents, id);
+  if (executeAction(id)) {
+    gEvents = [];
+    return;
+  } else {
+    if (hasKeyStartingWith(ACTION_MAP, id)) {
       return;
+    }
+    for (var i = 1; i < gEvents.length; ++i) {
+      var slice = gEvents.slice(i);
+      var id = chainId(slice);
+      if (executeAction(id)) {
+        gEvents = [];
+        return;
+      }
     }
   }
 }
