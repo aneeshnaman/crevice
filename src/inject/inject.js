@@ -29,11 +29,11 @@ function handleKey(e) {
   log(gEvents, id);
   if (executeAction(id)) {
     gEvents = [];
-    return;
+    return true;
   } else {
     if (hasKeyStartingWith(ACTION_MAP, id)) {
       // something more can happen, wait...
-      return;
+      return false;
     }
     // nothing more can happen. now see if any suffix of the current event-seq
     // is a valid key combo, and execute that.
@@ -42,22 +42,26 @@ function handleKey(e) {
       var id = chainId(slice);
       if (executeAction(id)) {
         gEvents = [];
-        return;
+        return true;
       }
     }
   }
+  return false;
 }
 
 function handleEvent(e) {
   if (e.keyCode >= 32 && e.keyCode <= 126) {
     log(e.keyCode, e.shiftKey);
-    if (shift(e)) {
-      e.keyCode = String.fromCharCode(e.keyCode).toUpperCase().charCodeAt(0);
+    var ke = new KeyEvent(e);
+    if (shift(ke)) {
+      setKey(ke, String.fromCharCode(key(ke)).toUpperCase().charCodeAt(0));
     } else {
-      e.keyCode = String.fromCharCode(e.keyCode).toLowerCase().charCodeAt(0);
+      setKey(ke, String.fromCharCode(key(ke)).toLowerCase().charCodeAt(0));
     }
-    log(e.keyCode, e.shiftKey);
-    handleKey(e);
+    if (handleKey(ke)) {
+      e.preventDefault();
+    }
   }
 }
+
 document.addEventListener(EVENT_KEYDOWN, handleEvent);

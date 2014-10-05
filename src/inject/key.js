@@ -1,7 +1,17 @@
+function KeyEvent(e) {
+  this.timeStamp = e.timeStamp;
+  this.ctrlKey = e.ctrlKey;
+  this.altKey = e.altKey;
+  this.shiftKey = e.shiftKey;
+  this.keyCode = e.keyCode;
+}
+
 function time(e) { return e.timeStamp; }
 function ctrl(e) { return e.ctrlKey; }
 function alt(e) { return e.altKey; }
 function shift(e) { return e.shiftKey; }
+function key(e) { return e.keyCode; }
+function setKey(e, key) { e.keyCode = key; }
 
 function keyId(e) {
   var CTRL_ID = "Ctrl+";
@@ -10,12 +20,7 @@ function keyId(e) {
   var id = "";
   if (ctrl(e)) { id += CTRL_ID; }
   if (alt(e)) { id += ALT_ID; }
-  var key = String.fromCharCode(e.keyCode);
-  if (shift(e)) {
-    id += String.fromCharCode(e.keyCode).toUpperCase();
-  } else {
-    id += String.fromCharCode(e.keyCode).toLowerCase();
-  }
+  id += String.fromCharCode(key(e));
   return id;
 }
 
