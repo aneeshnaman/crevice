@@ -10,7 +10,12 @@ function keyId(e) {
   var id = "";
   if (ctrl(e)) { id += CTRL_ID; }
   if (alt(e)) { id += ALT_ID; }
-  id += String.fromCharCode(e.charCode);
+  var key = String.fromCharCode(e.keyCode);
+  if (shift(e)) {
+    id += String.fromCharCode(e.keyCode).toUpperCase();
+  } else {
+    id += String.fromCharCode(e.keyCode).toLowerCase();
+  }
   return id;
 }
 

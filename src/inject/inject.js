@@ -1,6 +1,6 @@
 var CHAIN_TIMEOUT_MS = 300;
-var EVENT_KEYPRESS = "keypress";
-var ENABLE_LOGGING = false;
+var EVENT_KEYDOWN = "keydown";
+var ENABLE_LOGGING = true;
 
 var currentlyInChain = false;
 
@@ -19,7 +19,7 @@ function executeAction(id) {
 
 var gEvents = [];
 
-function handleEvent(e) {
+function handleKey(e) {
   if (gEvents.length > 0 && (now() - time(last(gEvents))) > CHAIN_TIMEOUT_MS) {
     gEvents = [];
   }
@@ -48,4 +48,16 @@ function handleEvent(e) {
   }
 }
 
-document.addEventListener(EVENT_KEYPRESS, handleEvent);
+function handleEvent(e) {
+  if (e.keyCode >= 32 && e.keyCode <= 126) {
+    log(e.keyCode, e.shiftKey);
+    if (shift(e)) {
+      e.keyCode = String.fromCharCode(e.keyCode).toUpperCase().charCodeAt(0);
+    } else {
+      e.keyCode = String.fromCharCode(e.keyCode).toLowerCase().charCodeAt(0);
+    }
+    log(e.keyCode, e.shiftKey);
+    handleKey(e);
+  }
+}
+document.addEventListener(EVENT_KEYDOWN, handleEvent);
