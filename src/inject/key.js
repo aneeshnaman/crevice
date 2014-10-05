@@ -1,5 +1,12 @@
+/**
+ * TODO
+ * marks
+ * regex search
+ * hints mode
+ * command line
+ */
+
 function getKey(keyCode, shiftKey) {
-  log(keyCode, shiftKey);
   if (keyCode >= 48 && keyCode <= 57) {
     // 0-9
     if (!shiftKey) {
@@ -20,6 +27,9 @@ function getKey(keyCode, shiftKey) {
 
   if (!shiftKey) {
     return {
+      8: '<bksp>',
+      13: '<ret>',
+      32: ' ',
       186: ';',
       187: '=',
       188: ',',
@@ -58,22 +68,22 @@ function KeyEvent(e) {
   this.key = getKey(e.keyCode, e.shiftKey);
 }
 
-function time(e) { return e.timeStamp; }
-function ctrl(e) { return e.ctrlKey; }
-function alt(e) { return e.altKey; }
-function shift(e) { return e.shiftKey; }
-function key(e) { return e.key; }
-function hasKey(e) { return !!e.key; }
-function setKey(e, key) { e.key = key; }
+function time(ke) { return ke.timeStamp; }
+function ctrl(ke) { return ke.ctrlKey; }
+function alt(ke) { return ke.altKey; }
+function shift(ke) { return ke.shiftKey; }
+function key(ke) { return ke.key; }
+function hasKey(ke) { return !!ke.key; }
+function setKey(ke, key) { ke.key = key; }
 
-function keyId(e) {
+function keyId(ke) {
   var CTRL_ID = "Ctrl+";
   var ALT_ID = "Alt+";
 
   var id = "";
-  if (ctrl(e)) { id += CTRL_ID; }
-  if (alt(e)) { id += ALT_ID; }
-  id += key(e);
+  if (ctrl(ke)) { id += CTRL_ID; }
+  if (alt(ke)) { id += ALT_ID; }
+  id += key(ke);
   return id;
 }
 
@@ -81,6 +91,6 @@ function chainId(events) {
   var KEY_SEPARATOR = "_";
 
   var components = [];
-  events.forEach(function(e) { components.push(keyId(e)); });
+  events.forEach(function(ke) { components.push(keyId(ke)); });
   return components.join(KEY_SEPARATOR);
 }
