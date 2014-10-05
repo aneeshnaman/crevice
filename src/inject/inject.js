@@ -11,7 +11,7 @@ function log() {
 function executeAction(id) {
   var action = ACTION_MAP[id];
   if (action) {
-    action.call(this, id);
+    action();
     return true;
   }
   return false;
@@ -50,17 +50,10 @@ function handleKey(e) {
 }
 
 function handleEvent(e) {
-  if (e.keyCode >= 32 && e.keyCode <= 126) {
-    log(e.keyCode, e.shiftKey);
-    var ke = new KeyEvent(e);
-    if (shift(ke)) {
-      setKey(ke, String.fromCharCode(key(ke)).toUpperCase().charCodeAt(0));
-    } else {
-      setKey(ke, String.fromCharCode(key(ke)).toLowerCase().charCodeAt(0));
-    }
-    if (handleKey(ke)) {
-      e.preventDefault();
-    }
+  var ke = new KeyEvent(e);
+  log(key(ke));
+  if (hasKey(ke) && handleKey(ke)) {
+    e.preventDefault();
   }
 }
 

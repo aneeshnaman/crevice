@@ -7,4 +7,5 @@ var ACTION_MAP = {
   "Ctrl+b": PAGE_UP,
   "Ctrl+d": PAGE_HALF_DOWN,
   "Ctrl+u": PAGE_HALF_UP,
+  "/": SEARCH
 };
