@@ -23,3 +23,15 @@ function hasKeyStartingWith(map, prefix) {
   }
   return false;
 }
+
+function escapeRegExp(string){
+  return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
+}
+
+function getText(element) {
+  return element.textContent || "";
+}
+
+function isVisible(node) {
+  return node.offsetHeight > 0;
+}

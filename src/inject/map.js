@@ -16,6 +16,7 @@ ACTION_MAP[Mode.NORMAL] = {
   "Ctrl+u": PAGE_HALF_UP,
   "/": START_SEARCH,
   "n": SEARCH_NEXT,
+  "N": SEARCH_BACK,
   ",_ ": STOP_SEARCH,
 };
 

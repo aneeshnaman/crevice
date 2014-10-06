@@ -10,7 +10,7 @@ function SearchState() {
 
 SearchState.prototype.reset = function(pattern) {
   this.pattern = pattern;
-  this.re = new RegExp(pattern, "g");
+  this.re = new RegExp(escapeRegExp(pattern), "g");
 };
 
 function SearchHighlight() {
@@ -77,14 +77,20 @@ Searcher.prototype.stopSearch = function() {
 };
 
 Searcher.prototype.getNextMatchingElem = function() {
-  var result = this.searchState.re.exec(this.rootElement.textContent);
-  if (!result) {
-    log("NO FIND");
-    return null;
-  }
-  log(result.index, result[0]);
-  var node = this.searchNode.getContainingNode(result.index);
-  return node && node.element || null;
+  var lastIndex = this.searchState.re.lastIndex;
+  do {
+    var match = this.searchState.re.exec(getText(this.rootElement));
+    if (!match) {
+      log("NO FIND");
+      return null;
+    }
+    log(match.index, match[0]);
+    var node = this.searchNode.getContainingNode(match.index);
+    if (node && node.element && isVisible(node.element.parentElement)) {
+      return node.element;
+    }
+  } while (this.searchState.re.lastIndex != lastIndex);
+  return null;
 }
 
 Searcher.prototype.handleNewCharacter = function(character) {
@@ -115,6 +121,10 @@ Searcher.prototype.searchNext = function() {
   this.searchHighlight.reset(elem);
   elem.scrollIntoViewIfNeeded();
 }
+
+Searcher.prototype.searchBack = function() {
+  // todo: implement
+};
 
 function styleSearchBox(elem) {
   elem.style.width = "15em";

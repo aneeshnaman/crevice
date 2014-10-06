@@ -1,6 +1,6 @@
 function SearchNode(element) {
   this.element = element;
-  this.length = element.textContent.length;
+  this.length = getText(element).length;
 
   this.childrenData = [];
   this.children = [];
@@ -11,7 +11,7 @@ function SearchNode(element) {
     if (!child instanceof Text &&
         !child instanceof Element) return;
     this.children.push(new SearchNode(child));
-    var length = child.textContent.length;
+    var length = getText(child).length;
     this.childrenData.push({ start: idx, length: length });
     idx += length;
   }
