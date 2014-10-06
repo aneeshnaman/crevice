@@ -1,8 +1,6 @@
 var EVENT_KEYDOWN = "keydown";
 
-// todo: make mode enums
-var gMode = "NORMAL";
-
+var gMode = Mode.NORMAL;
 var gKeyHandler = new KeyHandler(ACTION_MAP);
 
 document.addEventListener(EVENT_KEYDOWN, function(e) {

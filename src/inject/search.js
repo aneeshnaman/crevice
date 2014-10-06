@@ -14,14 +14,14 @@ document.body.appendChild(gSearchBox);
 var gSearchNode = new SearchNode(document.body);
 
 function startSearch() {
-  gMode = "SEARCH";
+  gMode = Mode.SEARCH;
   gSearchText.textContent = "/";
   gSearchBox.style.visibility = "visible";
   gSearchPattern = "";
 }
 
 function stopSearch() {
-  gMode = "NORMAL";
+  gMode = Mode.NORMAL;
   gSearchBox.style.visibility = "hidden";
   resetSearchHighlight();
 }
