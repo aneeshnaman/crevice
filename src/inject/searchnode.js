@@ -29,21 +29,23 @@ function SearchNode(element) {
   this.length = this.text.length;
 }
 
-SearchNode.prototype.getContainingNode = function(pos) {
-  if (pos < 0 || pos > this.length) {
+SearchNode.prototype.getContainingNodes = function(pos, length) {
+  if (pos > this.length || pos + length < 0) {
     return null;
   }
 
   if (this.children.length == 0) {
-    return this;
+    return [this];
   }
 
+  var result = [];
   for (var i = 0; i < this.childrenData.length; ++i) {
     var childData = this.childrenData[i];
-    if (pos >= childData.start && pos < childData.start + childData.length) {
-      return this.children[i].getContainingNode(pos - childData.start);
+    if ((pos < childData.start + childData.length) &&
+        (pos + length > childData.start)) {
+      result = result.concat(
+          this.children[i].getContainingNodes(pos - childData.start, length));
     }
   }
-
-  return null;
+  return result;
 };

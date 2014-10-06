@@ -22,7 +22,7 @@ ACTION_MAP[Mode.NORMAL] = {
 
 ACTION_MAP[Mode.SEARCH] = {
   "Ctrl+[": STOP_SEARCH,
-  "<ret>": STOP_SEARCH,
+  "<ret>": STOP_AND_SEARCH_NEXT,
   "<bksp>": SEARCH_BACKSPACE,
   "PASSTHROUGH": ADD_TO_SEARCH,
 };

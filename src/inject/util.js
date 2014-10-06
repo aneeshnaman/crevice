@@ -25,7 +25,8 @@ function hasKeyStartingWith(map, prefix) {
 }
 
 function escapeRegExp(string){
-  return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
+  //return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
+  return string.replace(/([\\])/g, "\\$1");
 }
 
 function isVisible(node) {

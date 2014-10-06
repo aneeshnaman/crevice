@@ -1,11 +1,3 @@
-/**
- * TODO
- * regex search
- * marks
- * hints mode
- * command line
- */
-
 function getKey(keyCode, shiftKey) {
   if (keyCode >= 48 && keyCode <= 57) {
     // 0-9

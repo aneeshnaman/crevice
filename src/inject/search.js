@@ -11,6 +11,7 @@ function SearchState() {
 SearchState.prototype.reset = function(pattern) {
   this.pattern = pattern;
   this.re = new RegExp(escapeRegExp(pattern), "g");
+  log(pattern, escapeRegExp(pattern));
 };
 
 function SearchHighlight() {
@@ -85,9 +86,11 @@ Searcher.prototype.getNextMatch = function() {
       return null;
     }
     log(match.index, match[0]);
-    var node = this.searchNode.getContainingNode(match.index);
-    if (node && node.element && isVisible(node.element.parentElement)) {
-      return {element: node.element, match: match[0]};
+    var nodes = this.searchNode.getContainingNodes(match.index, match[0].length);
+    if (nodes.length && nodes[0].element &&
+        isVisible(nodes[0].element.parentElement)) {
+      log(nodes);
+      return {element: nodes[0].element, match: match[0]};
     }
   } while (this.searchState.re.lastIndex != lastIndex);
   return null;
@@ -95,13 +98,13 @@ Searcher.prototype.getNextMatch = function() {
 
 Searcher.prototype.handleNewCharacter = function(character) {
   this.reset(this.searchState.pattern + character);
-  this.searchNext();
+  //this.searchNext();
 }
 
 Searcher.prototype.handleBackspace = function() {
   this.reset(this.searchState.pattern.substr(
         0, this.searchState.pattern.length - 1));
-  this.searchNext();
+  //this.searchNext();
 }
 
 Searcher.prototype.searchNext = function() {

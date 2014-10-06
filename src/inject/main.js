@@ -1,4 +1,12 @@
-var EVENT_KEYDOWN = "keydown";
+/**
+ * TODO
+ * regex search
+ * marks
+ * hints mode
+ * command line
+ * passthrough when in input boxes
+ * enable-disable plugin hot-keys
+ */
 
 var gMode = Mode.NORMAL;
 
@@ -8,6 +16,6 @@ gSearcher.install(document.body);
 
 // Start key handler
 var gKeyHandler = new KeyHandler(ACTION_MAP);
-document.addEventListener(EVENT_KEYDOWN, function(e) {
+document.addEventListener("keydown", function(e) {
   gKeyHandler.handleEvent(e, gMode);
 });
