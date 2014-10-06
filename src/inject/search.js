@@ -98,13 +98,11 @@ Searcher.prototype.getNextMatch = function() {
 
 Searcher.prototype.handleNewCharacter = function(character) {
   this.reset(this.searchState.pattern + character);
-  //this.searchNext();
 }
 
 Searcher.prototype.handleBackspace = function() {
   this.reset(this.searchState.pattern.substr(
         0, this.searchState.pattern.length - 1));
-  //this.searchNext();
 }
 
 Searcher.prototype.searchNext = function() {
