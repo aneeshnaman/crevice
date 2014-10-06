@@ -30,3 +30,8 @@ function SEARCH_BACKSPACE(ke, id) { gSearcher.handleBackspace(); }
 
 function ENABLE_CREVICE(ke, id) { gMode = Mode.NORMAL; }
 function DISABLE_CREVICE(ke, id) { gMode = Mode.DISABLED; }
+
+function HISTORY_BACK() { window.history.back(); }
+function HISTORY_FORWARD() { window.history.forward(); }
+function REFRESH() { window.location.reload(); }
+function REFRESH_FORCE() { window.location.reload(true); }

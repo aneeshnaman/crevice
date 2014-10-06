@@ -1,13 +1,12 @@
 /**
  * TODO
- * regex search
  * marks
  * hints mode
  * command line
  * passthrough when in input boxes
- * history navigation
  * focus first input box
  * UI hints for current mode
+ * close / reopen tab
  */
 
 var gMode = Mode.NORMAL;

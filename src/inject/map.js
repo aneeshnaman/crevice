@@ -14,6 +14,8 @@ ACTION_MAP[Mode.NORMAL] = {
   "Ctrl+0": DISABLE_CREVICE,
   "j": SCROLL_DOWN,
   "k": SCROLL_UP,
+  "H": HISTORY_BACK,
+  "L": HISTORY_FORWARD,
   "g_g": SCROLL_TOP,
   "G": SCROLL_BOTTOM,
   "Ctrl+f": PAGE_DOWN,
@@ -24,6 +26,8 @@ ACTION_MAP[Mode.NORMAL] = {
   "n": SEARCH_NEXT,
   "N": SEARCH_BACK,
   ",_ ": STOP_SEARCH,
+  "r": REFRESH,
+  "R": REFRESH_FORCE,
 };
 
 ACTION_MAP[Mode.SEARCH] = {

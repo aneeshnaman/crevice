@@ -2,7 +2,6 @@
 // * backwards match
 // * case-insensitive match
 // * highlight only the matching text
-// * match can span multiple elements
 
 function SearchState() {
   this.reset("");
