@@ -79,7 +79,7 @@ Searcher.prototype.stopSearch = function() {
 Searcher.prototype.getNextMatch = function() {
   var lastIndex = this.searchState.re.lastIndex;
   do {
-    var match = this.searchState.re.exec(getText(this.rootElement));
+    var match = this.searchState.re.exec(this.searchNode.text);
     if (!match) {
       log("NO MATCHES");
       return null;

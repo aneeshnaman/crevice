@@ -28,10 +28,9 @@ function escapeRegExp(string){
   return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
 }
 
-function getText(element) {
-  return element.textContent || "";
-}
-
 function isVisible(node) {
+  if (node instanceof Text) {
+    return isVisible(node.parentElement);
+  }
   return node.offsetHeight > 0;
 }
