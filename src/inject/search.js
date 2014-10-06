@@ -77,7 +77,7 @@ Searcher.prototype.stopSearch = function() {
   this.searchBox.hide();
 };
 
-Searcher.prototype.getNextMatch = function() {
+Searcher.prototype.getNextMatches = function() {
   var lastIndex = this.searchState.re.lastIndex;
   do {
     var match = this.searchState.re.exec(this.searchNode.text);
@@ -87,9 +87,12 @@ Searcher.prototype.getNextMatch = function() {
     }
     log(match.index, match[0]);
     var nodes = this.searchNode.getContainingNodes(match.index, match[0].length);
-    if (nodes.length && nodes[0].element) {
+    if (nodes.length) {
       log(nodes);
-      return {element: nodes[0].element, match: match[0]};
+      return {
+        nodes: nodes,
+        match: match[0]
+      };
     }
   } while (this.searchState.re.lastIndex != lastIndex);
   return null;
@@ -107,14 +110,14 @@ Searcher.prototype.handleBackspace = function() {
 Searcher.prototype.searchNext = function() {
   this.searchHighlight.reset(null);
 
-  var match = this.getNextMatch();
-  if (match && match.element == this.searchBox.textElem) {
-    match = this.getNextMatch();
+  var matches = this.getNextMatches();
+  if (matches && matches.nodes[0].node.element == this.searchBox.textElem) {
+    matches = this.getNextMatches();
   }
-  if (!match) return;
+  if (!matches) return;
 
   // element will always be a Text node, so take its parent.
-  var parent = match.element.parentElement;
+  var parent = matches.nodes[0].node.element.parentElement;
   this.searchHighlight.reset(parent);
   parent.scrollIntoViewIfNeeded();
 };

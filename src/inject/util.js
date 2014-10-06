@@ -35,3 +35,11 @@ function isVisible(node) {
   }
   return node.offsetHeight > 0;
 }
+
+function max(a, b) {
+  return a > b ? a : b;
+}
+
+function min(a, b) {
+  return a < b ? a : b;
+}

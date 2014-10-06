@@ -35,7 +35,11 @@ SearchNode.prototype.getContainingNodes = function(pos, length) {
   }
 
   if (this.children.length == 0) {
-    return [this];
+    return [{
+      node: this,
+      start: max(0, pos),
+      end: min(this.length, pos + length)
+    }];
   }
 
   var result = [];
