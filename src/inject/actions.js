@@ -27,3 +27,6 @@ function ADD_TO_SEARCH(ke, id) { gSearcher.handleNewCharacter(id); }
 function SEARCH_NEXT(ke, id) { gSearcher.searchNext(); }
 function SEARCH_BACK(ke, id) { gSearcher.searchBack(); }
 function SEARCH_BACKSPACE(ke, id) { gSearcher.handleBackspace(); }
+
+function ENABLE_CREVICE(ke, id) { gMode = Mode.NORMAL; }
+function DISABLE_CREVICE(ke, id) { gMode = Mode.DISABLED; }

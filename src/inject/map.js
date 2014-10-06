@@ -1,11 +1,17 @@
 var Mode = {
+  DISABLED: "disabled",
   NORMAL: "normal",
   SEARCH: "search",
 };
 
 var ACTION_MAP = {};
 
+ACTION_MAP[Mode.DISABLED] = {
+  "Ctrl+0": ENABLE_CREVICE,
+};
+
 ACTION_MAP[Mode.NORMAL] = {
+  "Ctrl+0": DISABLE_CREVICE,
   "j": SCROLL_DOWN,
   "k": SCROLL_UP,
   "g_g": SCROLL_TOP,

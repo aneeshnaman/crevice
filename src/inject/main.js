@@ -5,7 +5,9 @@
  * hints mode
  * command line
  * passthrough when in input boxes
- * enable-disable plugin hot-keys
+ * history navigation
+ * focus first input box
+ * UI hints for current mode
  */
 
 var gMode = Mode.NORMAL;
