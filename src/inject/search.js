@@ -87,8 +87,7 @@ Searcher.prototype.getNextMatch = function() {
     }
     log(match.index, match[0]);
     var nodes = this.searchNode.getContainingNodes(match.index, match[0].length);
-    if (nodes.length && nodes[0].element &&
-        isVisible(nodes[0].element.parentElement)) {
+    if (nodes.length && nodes[0].element) {
       log(nodes);
       return {element: nodes[0].element, match: match[0]};
     }

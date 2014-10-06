@@ -31,7 +31,7 @@ function SearchNode(element) {
 
 SearchNode.prototype.getContainingNodes = function(pos, length) {
   if (pos > this.length || pos + length < 0) {
-    return null;
+    return [];
   }
 
   if (this.children.length == 0) {
