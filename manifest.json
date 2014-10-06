@@ -20,6 +20,7 @@
       "js": [
         "src/inject/util.js",
         "src/inject/key.js",
+        "src/inject/keyhandler.js",
         "src/inject/searchnode.js",
         "src/inject/search.js",
         "src/inject/actions.js",

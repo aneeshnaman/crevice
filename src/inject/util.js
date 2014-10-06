@@ -1,3 +1,8 @@
+var ENABLE_LOGGING = true;
+function log() {
+  if (ENABLE_LOGGING) console.log(arguments);
+}
+
 function now() {
   return new Date().getTime();
 }
