@@ -1,7 +1,7 @@
 /**
  * TODO
- * marks
  * regex search
+ * marks
  * hints mode
  * command line
  */
