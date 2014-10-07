@@ -1,40 +1,34 @@
-function SearchNode(element) {
-  this.element = element;
+function SearchNode(node) {
+  this.node = node;
   this.text = "";
   this.childrenData = [];
   this.children = [];
 
-  var idx = 0;
-  for (var i = 0; i < element.childNodes.length; ++i) {
-    var child = element.childNodes[i];
-    if (!isVisible(child)) continue;
-    if (!child instanceof Text &&
-        !child instanceof Element) continue;
+  if (node instanceof Text) {
+    this.resetFromTextNode(node);
+  } else {
+    var idx = 0;
+    for (var i = 0; i < node.childNodes.length; ++i) {
+      var child = node.childNodes[i];
+      if (!isVisible(child)) continue;
+      if (!child instanceof Text &&
+          !child instanceof node) continue;
 
-    var childSearchNode = new SearchNode(child);
-    this.text += childSearchNode.text;
-    var length = childSearchNode.length;
-    this.childrenData.push({ start: idx, length: length });
-    this.children.push(childSearchNode);
+      var childSearchNode = new SearchNode(child);
+      this.text += childSearchNode.text;
+      var length = childSearchNode.length;
+      this.childrenData.push({ start: idx, length: length });
+      this.children.push(childSearchNode);
     idx += length;
+    }
+    this.length = this.text.length;
   }
-
-  if (element.childNodes.length == 0) {
-    // because of the previous conditions, this will always be a Text node,
-    // and visible.
-    this.text = element.textContent;
-  }
-
-  this.length = this.text.length;
 }
 
 SearchNode.prototype.resetFromTextNode = function(textNode) {
-  this.element = textNode;
+  this.node = textNode;
   this.text = textNode.textContent;
   this.length = this.text.length;
-
-  this.childrenData = [];
-  this.children = [];
 };
 
 SearchNode.prototype.getContainingNodes = function(pos, length) {
@@ -44,7 +38,7 @@ SearchNode.prototype.getContainingNodes = function(pos, length) {
 
   if (this.children.length == 0) {
     return [{
-      node: this,
+      searchNode: this,
       start: max(0, pos),
       end: min(this.length, pos + length)
     }];

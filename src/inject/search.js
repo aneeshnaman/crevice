@@ -24,29 +24,29 @@ SearchHighlight.prototype.reset = function(matches) {
     this.highlights.forEach(function(hl) {
       var newText = document.createTextNode("");
       var parentElem = hl.span.parentElement;
-      if (hl.original != hl.element && hl.element != hl.trailing) {
-        newText.textContent = hl.original.textContent + hl.element.textContent +
+      if (hl.original != hl.matched && hl.matched != hl.trailing) {
+        newText.textContent = hl.original.textContent + hl.matched.textContent +
           hl.trailing.textContent;
         parentElem.insertBefore(newText, hl.original);
         parentElem.removeChild(hl.original);
         parentElem.removeChild(hl.span);
         parentElem.removeChild(hl.trailing);
-      } else if (hl.original != hl.element) {
-        newText.textContent = hl.original.textContent + hl.element.textContent;
+      } else if (hl.original != hl.matched) {
+        newText.textContent = hl.original.textContent + hl.matched.textContent;
         parentElem.insertBefore(newText, hl.original);
         parentElem.removeChild(hl.original);
         parentElem.removeChild(hl.span);
-      } else if (hl.element != hl.trailing) {
-        newText.textContent = hl.element.textContent + hl.trailing.textContent;
+      } else if (hl.matched != hl.trailing) {
+        newText.textContent = hl.matched.textContent + hl.trailing.textContent;
         parentElem.insertBefore(newText, hl.span);
         parentElem.removeChild(hl.span);
         parentElem.removeChild(hl.trailing);
       } else {
-        newText.textContent = hl.element.textContent;
+        newText.textContent = hl.matched.textContent;
         parentElem.insertBefore(newText, hl.span);
         parentElem.removeChild(hl.span);
       }
-      hl.node.resetFromTextNode(newText);
+      hl.searchNode.resetFromTextNode(newText);
     });
   }
 
@@ -55,28 +55,28 @@ SearchHighlight.prototype.reset = function(matches) {
 
   for (var i = 0; i < matches.length; ++i) {
     var match = matches[i];
-    var original = match.node.element;
-    var element = match.node.element;
+    var original = match.searchNode.node;
+    var matched = match.searchNode.node;
     if (match.start != 0) {
-      element = element.splitText(match.start);
+      matched = matched.splitText(match.start);
     }
-    var trailing = element;
-    if (match.end != element.textContent.length) {
-      trailing = element.splitText(match.end - match.start);
+    var trailing = matched;
+    if (match.end != matched.textContent.length) {
+      trailing = matched.splitText(match.end - match.start);
     }
     var range = document.createRange();
-    range.selectNode(element);
+    range.selectNode(matched);
     var span = document.createElement("span");
     range.surroundContents(span);
     span.style.background = "yellow";
 
     this.highlights.push({
       original: original,
-      element: element,
+      matched: matched,
       trailing: trailing,
       originalBackground: original.parentElement.style.background,
       span: span,
-      node: match.node
+      searchNode: match.searchNode
     });
   }
 };
@@ -162,14 +162,13 @@ Searcher.prototype.searchNext = function() {
   this.searchHighlight.reset();
 
   var matches = this.getNextMatches();
-  if (matches && matches.nodes[0].node.element == this.searchBox.textElem) {
+  if (matches && matches.nodes[0].searchNode.node == this.searchBox.textElem) {
     matches = this.getNextMatches();
   }
   if (!matches) return;
 
-  // element will always be a Text node, so take its parent.
   if (matches.nodes.length > 0) {
-    var parent = matches.nodes[0].node.element.parentElement;
+    var parent = matches.nodes[0].searchNode.node.parentElement;
     parent.scrollIntoViewIfNeeded();
   }
 
