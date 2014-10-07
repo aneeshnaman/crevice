@@ -1,7 +1,6 @@
 function SearchNode(element) {
   this.element = element;
   this.text = "";
-
   this.childrenData = [];
   this.children = [];
 
@@ -28,6 +27,15 @@ function SearchNode(element) {
 
   this.length = this.text.length;
 }
+
+SearchNode.prototype.resetFromTextNode = function(textNode) {
+  this.element = textNode;
+  this.text = textNode.textContent;
+  this.length = this.text.length;
+
+  this.childrenData = [];
+  this.children = [];
+};
 
 SearchNode.prototype.getContainingNodes = function(pos, length) {
   if (pos > this.length || pos + length < 0) {

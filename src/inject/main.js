@@ -8,6 +8,8 @@
  * UI hints for current mode
  * close / reopen tab
  * search history
+ *
+ * J/K to move tabs
  */
 
 var gMode = Mode.NORMAL;
