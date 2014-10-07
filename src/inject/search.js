@@ -1,6 +1,5 @@
 // TODO
 // * backwards match
-// * case-insensitive match
 // * highlight only the matching text
 
 function SearchState() {
@@ -9,8 +8,12 @@ function SearchState() {
 
 SearchState.prototype.reset = function(pattern) {
   this.pattern = pattern;
-  this.re = new RegExp(escapeRegExp(pattern), "g");
-  log(pattern, escapeRegExp(pattern));
+  if (startsWith(this.pattern, "\\c")) {
+    this.re = new RegExp(escapeRegExp(this.pattern.substr(2)), "gi");
+  } else {
+    this.re = new RegExp(escapeRegExp(this.pattern), "g");
+  }
+  log(pattern, this.re.source);
 };
 
 function SearchHighlight() {
@@ -126,12 +129,13 @@ Searcher.prototype.searchBack = function() {
 };
 
 function styleSearchBox(elem) {
-  elem.style.width = "15em";
+  elem.style.width = "100%";
   elem.style.padding = "0 5px";
-  elem.style.background = "#333";
-  elem.style.color = "white";
+
+  elem.style.background = "#efefef";
   elem.style.position = "fixed";
+  elem.style.borderTop = "1px solid #aaa";
+
   elem.style.bottom = "0";
-  elem.style.right = "0";
   elem.style.visibility = "hidden";
 };
