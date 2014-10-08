@@ -35,3 +35,12 @@ function HISTORY_BACK() { window.history.back(); }
 function HISTORY_FORWARD() { window.history.forward(); }
 function REFRESH() { window.location.reload(); }
 function REFRESH_FORCE() { window.location.reload(true); }
+
+function FOCUS_NEXT_INPUT() { focusNextInput(); }
+
+function EXIT_INSERT_MODE() {
+  if (isTextInput(document.activeElement)) {
+    document.activeElement.blur();
+  }
+  gMode = Mode.NORMAL;
+}

@@ -1,6 +1,5 @@
 /**
  * TODO
- * passthrough when in input boxes
  * J/K to move tabs
  * close / reopen tab
  * UI hints for current mode
@@ -8,7 +7,6 @@
  * marks
  * hints mode
  * command line
- * focus first input box
  * search history
  *
  */

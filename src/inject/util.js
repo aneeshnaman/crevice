@@ -55,3 +55,10 @@ function isTextInput(node) {
 
   return false;
 }
+
+function compareByPosition(node1, node2) {
+  var comp = node1.compareDocumentPosition();
+  if (comp & Node.DOCUMENT_POSITION_PRECEDING) return -1;
+  if (comp & Node.DOCUMENT_POSITION_FOLLOWING) return 1;
+  return 0;
+}

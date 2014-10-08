@@ -4,20 +4,14 @@ function KeyHandler(actionMap) {
 }
 
 KeyHandler.prototype.handleEvent = function(e, mode) {
-  if (KeyHandler.shouldIgnoreEvent(e, mode)) return;
+  if (isTextInput(document.activeElement)) {
+    mode = Mode.INSERT;
+  }
   var ke = new KeyEvent(e);
   if (hasKey(ke) && this.handleKey(ke, mode)) {
     e.preventDefault();
   }
 }
-
-KeyHandler.shouldIgnoreEvent = function(e, mode) {
-  if (isTextInput(document.activeElement)) {
-    log("ignoring input box");
-    return true;
-  }
-  return false;
-};
 
 KeyHandler.CHAIN_TIMEOUT_MS = 300;
 

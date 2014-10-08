@@ -2,6 +2,7 @@ var Mode = {
   DISABLED: "disabled",
   NORMAL: "normal",
   SEARCH: "search",
+  INSERT: "insert",
 };
 
 var ACTION_MAP = {};
@@ -28,6 +29,7 @@ ACTION_MAP[Mode.NORMAL] = {
   ",_ ": STOP_SEARCH,
   "r": REFRESH,
   "R": REFRESH_FORCE,
+  "g_i": FOCUS_NEXT_INPUT,
 };
 
 ACTION_MAP[Mode.SEARCH] = {
@@ -35,4 +37,8 @@ ACTION_MAP[Mode.SEARCH] = {
   "<ret>": STOP_AND_SEARCH_NEXT,
   "<bksp>": SEARCH_BACKSPACE,
   "PASSTHROUGH": ADD_TO_SEARCH,
+};
+
+ACTION_MAP[Mode.INSERT] = {
+  "Ctrl+[": EXIT_INSERT_MODE,
 };
