@@ -1,5 +1,6 @@
 /**
  * TODO
+ * t/o to open new tabs
  * J/K to move tabs
  * close / reopen tab
  * UI hints for current mode
