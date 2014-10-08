@@ -43,3 +43,15 @@ function max(a, b) {
 function min(a, b) {
   return a < b ? a : b;
 }
+
+function isInputTypeText(type) {
+  return ["email", "number", "password", "search", "tel", "text", "url"]
+    .indexOf(type) >= 0;
+}
+
+function isTextInput(node) {
+  if (node instanceof HTMLInputElement && isInputTypeText(node.type)) return true;
+  if (node instanceof HTMLTextAreaElement) return true;
+
+  return false;
+}
