@@ -10,9 +10,9 @@ function SearchNode(node) {
     var idx = 0;
     for (var i = 0; i < node.childNodes.length; ++i) {
       var child = node.childNodes[i];
-      if (!isVisible(child)) continue;
       if (!child instanceof Text &&
-          !child instanceof node) continue;
+          !child instanceof Node) continue;
+      if (child instanceof Text && !isVisible(child)) continue;
 
       var childSearchNode = new SearchNode(child);
       this.text += childSearchNode.text;

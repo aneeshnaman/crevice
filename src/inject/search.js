@@ -1,6 +1,5 @@
 // TODO
 // * backwards match
-// * highlight only the matching text
 
 function SearchState() {
   this.reset("");

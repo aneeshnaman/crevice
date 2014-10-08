@@ -1,15 +1,16 @@
 /**
  * TODO
+ * passthrough when in input boxes
+ * J/K to move tabs
+ * close / reopen tab
+ * UI hints for current mode
+ *
  * marks
  * hints mode
  * command line
- * passthrough when in input boxes
  * focus first input box
- * UI hints for current mode
- * close / reopen tab
  * search history
  *
- * J/K to move tabs
  */
 
 var gMode = Mode.NORMAL;
