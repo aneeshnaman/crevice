@@ -1,6 +1,3 @@
-// TODO
-// * backwards match
-
 function SearchState() {
   this.reset("");
 }

@@ -1,14 +1,17 @@
 /**
  * TODO
  * t/o to open new tabs
- * J/K to move tabs
- * close / reopen tab
+ * reopen last tab
+ *
  * UI hints for current mode
  *
  * marks
  * hints mode
  * command line
+ *
+ * backwards search
  * search history
+ * search hints in scrollbar
  *
  */
 

@@ -14,6 +14,9 @@
     "https://*/*",
     "http://*/*"
   ],
+  "background": {
+    "scripts": ["src/background.js"]
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -24,6 +27,7 @@
         "src/inject/keyhandler.js",
         "src/inject/searchnode.js",
         "src/inject/search.js",
+        "src/inject/tabs.js",
         "src/inject/actions.js",
         "src/inject/map.js",
         "src/inject/main.js"

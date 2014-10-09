@@ -30,6 +30,10 @@ ACTION_MAP[Mode.NORMAL] = {
   "r": REFRESH,
   "R": REFRESH_FORCE,
   "g_i": FOCUS_NEXT_INPUT,
+  "t": NEW_TAB,
+  "J": PREVIOUS_TAB,
+  "K": NEXT_TAB,
+  "d": CLOSE_TAB,
 };
 
 ACTION_MAP[Mode.SEARCH] = {
