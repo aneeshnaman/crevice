@@ -1,17 +1,16 @@
 /**
  * TODO
+ * command line
  * t/o to open new tabs
- *
- * UI hints for current mode
  *
  * marks
  * hints mode
- * command line
  *
  * backwards search
  * search history
  * search hints in scrollbar
  *
+ * UI hints for current mode
  */
 
 var gMode = Mode.NORMAL;

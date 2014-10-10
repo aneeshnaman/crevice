@@ -91,32 +91,13 @@ SearchHighlight.prototype.getHighlightedSpans = function() {
   return spans;
 };
 
-function SearchBox() {
-  this.boxElem = document.createElement("div");
-  this.textElem = document.createTextNode("");
-  this.boxElem.appendChild(this.textElem);
-  styleSearchBox(this.boxElem);
-}
-
-SearchBox.prototype.show = function() {
-  this.boxElem.style.visibility = "visible";
-};
-
-SearchBox.prototype.hide = function() {
-  this.boxElem.style.visibility = "hidden";
-};
-
-SearchBox.prototype.reset = function(pattern) {
-  this.textElem.textContent = "/" + pattern;
-};
-
 function Searcher(rootElement) {
   this.rootElement = rootElement;
 
   this.searchNode = new SearchNode(rootElement);
   this.searchState = new SearchState();
   this.searchHighlight = new SearchHighlight();
-  this.searchBox = new SearchBox();
+  this.searchBox = new CommandLine("/");
 }
 
 Searcher.prototype.install = function(container) {
@@ -172,9 +153,6 @@ Searcher.prototype.searchNext = function() {
   this.searchHighlight.reset();
 
   var matches = this.getNextMatches();
-  if (matches && matches.nodes[0].searchNode.node == this.searchBox.textElem) {
-    matches = this.getNextMatches();
-  }
   if (!matches) return;
 
   if (matches.nodes.length > 0) {
