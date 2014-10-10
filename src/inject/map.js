@@ -31,8 +31,8 @@ ACTION_MAP[Mode.NORMAL] = {
   "R": REFRESH_FORCE,
   "g_i": FOCUS_NEXT_INPUT,
   "t": NEW_TAB,
-  "J": PREVIOUS_TAB,
-  "K": NEXT_TAB,
+  "K": PREVIOUS_TAB,
+  "J": NEXT_TAB,
   "d": CLOSE_TAB,
 };
 

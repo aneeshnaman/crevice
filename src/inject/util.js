@@ -62,3 +62,27 @@ function compareByPosition(node1, node2) {
   if (comp & Node.DOCUMENT_POSITION_FOLLOWING) return -1;
   return 0;
 }
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function isFocusable(node) {
+  return (node instanceof HTMLAnchorElement && node.getAttribute("href")) ||
+    ((node instanceof HTMLInputElement ||
+      node instanceof HTMLSelectElement ||
+      node instanceof HTMLTextAreaElement ||
+      node instanceof HTMLButtonElement) &&
+     node.getAttribute("disabled") != null) ||
+    isNumber(node.getAttribute("tabindex"));
+}
+
+function getFocusableAncestor(node) {
+  while (node != document.body) {
+    if (isFocusable(node)) {
+      return node;
+    }
+    node = node.parentElement;
+  }
+  return null;
+}

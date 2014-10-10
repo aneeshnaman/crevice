@@ -4,15 +4,16 @@ function SearchState() {
 
 SearchState.prototype.reset = function(pattern) {
   this.pattern = pattern;
-  if (startsWith(this.pattern, "\\c")) {
-    this.re = new RegExp(escapeRegExp(this.pattern.substr(2)), "gi");
+  if (startsWith(this.pattern, "\\C")) {
+    this.re = new RegExp(escapeRegExp(this.pattern.substr(2)), "g");
   } else {
-    this.re = new RegExp(escapeRegExp(this.pattern), "g");
+    this.re = new RegExp(escapeRegExp(this.pattern), "gi");
   }
   log(pattern, this.re.source);
 };
 
 function SearchHighlight() {
+  this.highlights = [];
 }
 
 SearchHighlight.prototype.reset = function(matches) {
@@ -66,6 +67,11 @@ SearchHighlight.prototype.reset = function(matches) {
     range.surroundContents(span);
     span.style.background = "yellow";
 
+    var focusableAncestor = getFocusableAncestor(span);
+    if (focusableAncestor) {
+      focusableAncestor.focus();
+    }
+
     this.highlights.push({
       original: original,
       matched: matched,
@@ -75,6 +81,14 @@ SearchHighlight.prototype.reset = function(matches) {
       searchNode: match.searchNode
     });
   }
+};
+
+SearchHighlight.prototype.getHighlightedSpans = function() {
+  var spans = [];
+  this.highlights.forEach(function(hl) {
+    spans.push(hl.matched);
+  });
+  return spans;
 };
 
 function SearchBox() {
