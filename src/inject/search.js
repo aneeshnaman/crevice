@@ -101,7 +101,7 @@ function Searcher(rootElement) {
 }
 
 Searcher.prototype.install = function(container) {
-  container.appendChild(this.searchBox.boxElem);
+  this.searchBox.install(container);
 };
 
 Searcher.prototype.reset = function(pattern) {
@@ -166,15 +166,3 @@ Searcher.prototype.searchNext = function() {
 Searcher.prototype.searchBack = function() {
   // todo: implement
 };
-
-function styleSearchBox(elem) {
-  elem.style.width = "100%";
-  elem.style.padding = "0 5px";
-
-  elem.style.background = "#efefef";
-  elem.style.position = "fixed";
-  elem.style.borderTop = "1px solid #aaa";
-
-  elem.style.bottom = "0";
-  elem.style.visibility = "hidden";
-}
