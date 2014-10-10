@@ -33,7 +33,10 @@ ACTION_MAP[Mode.NORMAL] = {
   "t": NEW_TAB,
   "K": PREVIOUS_TAB,
   "J": NEXT_TAB,
+  "g_T": PREVIOUS_TAB,
+  "g_t": NEXT_TAB,
   "d": CLOSE_TAB,
+  "u": REOPEN_LAST_CLOSED,
 };
 
 ACTION_MAP[Mode.SEARCH] = {

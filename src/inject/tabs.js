@@ -11,6 +11,9 @@ function nextTab() {
 }
 
 function closeTab() {
-  console.log("close tab");
   chrome.runtime.sendMessage(null, {cmd: "close-tab"});
+}
+
+function reopenLastClosed() {
+  chrome.runtime.sendMessage(null, {cmd: "reopen-last-closed"});
 }

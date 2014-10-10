@@ -1,7 +1,6 @@
 /**
  * TODO
  * t/o to open new tabs
- * reopen last tab
  *
  * UI hints for current mode
  *
