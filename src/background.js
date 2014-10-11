@@ -14,6 +14,12 @@ chrome.runtime.onMessage.addListener(
         chrome.tabs.remove(sender.tab.id);
       } else if (request.cmd == "reopen-last-closed") {
         chrome.sessions.restore();
+      } else if (request.cmd == "reload-all") {
+        chrome.tabs.getAllInWindow(chrome.windows.WINDOW_ID_CURRENT,
+            function(tabs) {
+              console.log(tabs);
+              tabs.forEach(function(tab) { chrome.tabs.reload(tab.id); });
+            });
       }
     });
 

@@ -7,6 +7,8 @@ function CommandInput(header) {
 
   styleCommandDiv(this.boxElem);
   styleTextBox(this.textElem);
+
+  this.hide();
 }
 
 CommandInput.prototype.show = function() {
@@ -26,12 +28,19 @@ CommandInput.prototype.install = function(container) {
   container.appendChild(this.boxElem);
 };
 
+CommandInput.prototype.flashError = function() {
+  var box = this.boxElem;
+  box.style.background = "yellow";
+  window.setTimeout(function() {
+    box.style.background = "#efefef";
+  }, 500);
+};
+
 function styleCommandDiv(elem) {
   elem.style.width = "500px";
   elem.style.position = "fixed";
   elem.style.bottom = "0";
   elem.style.right = "0";
-  elem.style.visibility = "hidden";
 
   elem.style.borderTop = "1px solid #aaa";
   elem.style.background = "#efefef";
@@ -41,7 +50,6 @@ function styleTextBox(elem) {
   elem.style.width = "100%";
 
   elem.style.color = "#666";
-  elem.style.fontStyle = "italic";
   elem.style.fontSize = "smaller";
 
   elem.style.background = "#efefef";

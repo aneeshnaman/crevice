@@ -1,5 +1,6 @@
 function CommandLine() {
   this.command = "";
+  this.commander = new Commander();
   this.commandInput = new CommandInput(":");
 }
 
@@ -22,15 +23,8 @@ CommandLine.prototype.stop = function() {
 };
 
 CommandLine.prototype.execute = function() {
-  var parts = this.command.split(" ");
-  if (!parts.length) return;
-
-  var cmd = parts[0];
-  var args = parts.splice(1);
-  if (cmd == "open") {
-    window.location = args[0];
-  } else if (cmd == "tabopen") {
-    openNewTab(args[0]);
+  if (!this.commander.execute(this.command)) {
+    this.commandInput.flashError();
   }
 };
 

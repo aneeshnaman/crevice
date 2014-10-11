@@ -17,3 +17,7 @@ function closeTab() {
 function reopenLastClosed() {
   chrome.runtime.sendMessage(null, {cmd: "reopen-last-closed"});
 }
+
+function reloadAll() {
+  chrome.runtime.sendMessage(null, {cmd: "reload-all"});
+}

@@ -33,8 +33,9 @@ function DISABLE_CREVICE(ke, id) { gMode = Mode.DISABLED; }
 
 function HISTORY_BACK() { window.history.back(); }
 function HISTORY_FORWARD() { window.history.forward(); }
-function REFRESH() { window.location.reload(); }
-function REFRESH_FORCE() { window.location.reload(true); }
+function RELOAD() { window.location.reload(); }
+function RELOAD_FORCE() { window.location.reload(true); }
+function RELOAD_ALL() { reloadAll(); }
 
 function FOCUS_NEXT_INPUT() { focusNextInput(); }
 
@@ -45,11 +46,12 @@ function EXIT_INSERT_MODE() {
   gMode = Mode.NORMAL;
 }
 
-function NEW_TAB() { openNewTab(""); }
+function NEW_TAB(url) { openNewTab(url); }
 function PREVIOUS_TAB() { previousTab(); }
 function NEXT_TAB() { nextTab(); }
 function CLOSE_TAB() { closeTab(); }
 function REOPEN_LAST_CLOSED() { reopenLastClosed(); }
+function LOAD_URL(url) { window.location = url; }
 
 function START_COMMAND() {
   gMode = Mode.COMMAND;
