@@ -46,12 +46,12 @@ function EXIT_INSERT_MODE() {
   gMode = Mode.NORMAL;
 }
 
-function NEW_TAB(url) { openNewTab(url); }
+function LOAD_URL(url) { window.location = fixUrl(url); }
+function NEW_TAB(url) { openNewTab(fixUrl(url)); }
 function PREVIOUS_TAB() { previousTab(); }
 function NEXT_TAB() { nextTab(); }
 function CLOSE_TAB() { closeTab(); }
 function REOPEN_LAST_CLOSED() { reopenLastClosed(); }
-function LOAD_URL(url) { window.location = url; }
 
 function START_COMMAND() {
   gMode = Mode.COMMAND;

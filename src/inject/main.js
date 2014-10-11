@@ -3,7 +3,6 @@
  * command line
  * t/o to open new tabs
  *
- * marks
  * hints mode
  *
  * backwards search

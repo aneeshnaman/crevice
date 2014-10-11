@@ -86,3 +86,11 @@ function getFocusableAncestor(node) {
   }
   return null;
 }
+
+function fixUrl(url) {
+  if (startsWith(url, "http://" || startsWith(url, "https://"))) {
+    return url;
+  } else {
+    return "http://" + url;
+  }
+}
