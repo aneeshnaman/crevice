@@ -40,11 +40,12 @@ function styleCommandDiv(elem) {
 function styleTextBox(elem) {
   elem.style.width = "100%";
 
-  elem.style.color = "#066";
+  elem.style.color = "#666";
   elem.style.fontStyle = "italic";
   elem.style.fontSize = "smaller";
 
   elem.style.background = "#efefef";
   elem.style.borderWidth = "0";
-  elem.style.padding = "5px";
+  elem.style.outline = "0";
+  elem.style.padding = "0 5px";
 }
