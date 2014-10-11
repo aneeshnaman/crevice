@@ -1,13 +1,17 @@
 function CommandInput(header) {
   this.header = header;
   this.boxElem = document.createElement("div");
-  this.textElem = document.createTextNode("");
+  this.textElem = document.createElement("input");
+  this.textElem.setAttribute("data-crevice", "ignore-for-insert");
   this.boxElem.appendChild(this.textElem);
+
   styleCommandDiv(this.boxElem);
+  styleTextBox(this.textElem);
 }
 
 CommandInput.prototype.show = function() {
   this.boxElem.style.visibility = "visible";
+  this.textElem.focus();
 };
 
 CommandInput.prototype.hide = function() {
@@ -15,7 +19,7 @@ CommandInput.prototype.hide = function() {
 };
 
 CommandInput.prototype.reset = function(pattern) {
-  this.textElem.textContent = this.header + pattern;
+  this.textElem.value = this.header + pattern;
 };
 
 CommandInput.prototype.install = function(container) {
@@ -24,18 +28,23 @@ CommandInput.prototype.install = function(container) {
 
 function styleCommandDiv(elem) {
   elem.style.width = "500px";
-  elem.style.padding = "0 5px";
+  elem.style.position = "fixed";
+  elem.style.bottom = "0";
+  elem.style.right = "0";
+  elem.style.visibility = "hidden";
+
+  elem.style.borderTop = "1px solid #aaa";
+  elem.style.background = "#efefef";
+}
+
+function styleTextBox(elem) {
+  elem.style.width = "100%";
 
   elem.style.color = "#066";
   elem.style.fontStyle = "italic";
   elem.style.fontSize = "smaller";
 
   elem.style.background = "#efefef";
-  elem.style.position = "fixed";
-  elem.style.borderTop = "1px solid #aaa";
-
-  elem.style.bottom = "0";
-  elem.style.right = "0";
-  elem.style.visibility = "hidden";
+  elem.style.borderWidth = "0";
+  elem.style.padding = "5px";
 }
-

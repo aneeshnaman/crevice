@@ -4,7 +4,8 @@ function KeyHandler(actionMap) {
 }
 
 KeyHandler.prototype.handleEvent = function(e, mode) {
-  if (isTextInput(document.activeElement)) {
+  if (isTextInput(document.activeElement) &&
+      document.activeElement.getAttribute("data-crevice") != "ignore-for-insert") {
     mode = Mode.INSERT;
   }
   var ke = new KeyEvent(e);
