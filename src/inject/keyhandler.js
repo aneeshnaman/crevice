@@ -50,7 +50,7 @@ KeyHandler.prototype.handleKey = function(ke, mode) {
 KeyHandler.prototype.executeAction = function(ke, id, mode) {
   var action = this.actionMap[mode][id];
   if (action) {
-    action();
+    action(ke, id);
     return true;
   } else if ("PASSTHROUGH" in this.actionMap[mode]) {
     this.actionMap[mode]["PASSTHROUGH"](ke, id);

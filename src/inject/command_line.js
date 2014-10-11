@@ -1,6 +1,6 @@
-function CommandLine() {
+function CommandLine(commandMap) {
   this.command = "";
-  this.commander = new Commander();
+  this.commander = new Commander(commandMap);
   this.commandInput = new CommandInput(":");
 }
 

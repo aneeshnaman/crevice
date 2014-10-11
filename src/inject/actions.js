@@ -94,3 +94,18 @@ function CMD_OPEN_TAB_RELATIVE() {
   START_COMMAND();
   gCommand.reset("open " + document.URL);
 }
+
+function START_OPERATOR(ke, id) {
+  gMode = Mode.OPERATOR_PENDING;
+  gOp.start(id);
+}
+
+function CANCEL_OPERATOR() {
+  gOp.cancel();
+  gMode = Mode.NORMAL;
+}
+
+function HANDLE_OPERATOR(ke, id) {
+  gOp.handle(id);
+  gMode = Mode.NORMAL;
+}

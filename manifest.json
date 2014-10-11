@@ -33,6 +33,8 @@
         "src/inject/searchnode.js",
         "src/inject/search.js",
         "src/inject/tabs.js",
+        "src/inject/marks.js",
+        "src/inject/operator.js",
         "src/inject/map.js",
         "src/inject/main.js"
       ]

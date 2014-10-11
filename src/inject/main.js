@@ -11,6 +11,8 @@
  * search hints in scrollbar
  *
  * UI hints for current mode
+ *
+ * cmd-line tab completion
  */
 
 var gMode = Mode.NORMAL;
@@ -19,8 +21,10 @@ var gMode = Mode.NORMAL;
 var gSearcher = new Searcher(document.body);
 gSearcher.install(document.body);
 
-var gCommand = new CommandLine();
+var gCommand = new CommandLine(COMMAND_MAP);
 gCommand.install(document.body);
+
+gOp = new Operator();
 
 // Start key handler
 var gKeyHandler = new KeyHandler(ACTION_MAP);

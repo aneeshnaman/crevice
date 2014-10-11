@@ -4,6 +4,7 @@ var Mode = {
   SEARCH: "search",
   INSERT: "insert",
   COMMAND: "command",
+  OPERATOR_PENDING: "operator_pending",
 };
 
 var ACTION_MAP = {};
@@ -42,6 +43,8 @@ ACTION_MAP[Mode.NORMAL] = {
   "T": CMD_NEW_TAB_RELATIVE,
   "o": CMD_OPEN_TAB,
   "O": CMD_OPEN_TAB_RELATIVE,
+  "m": START_OPERATOR,
+  "'": START_OPERATOR,
 };
 
 ACTION_MAP[Mode.SEARCH] = {
@@ -58,6 +61,18 @@ ACTION_MAP[Mode.COMMAND] = {
   "PASSTHROUGH": ADD_TO_COMMAND,
 };
 
+ACTION_MAP[Mode.OPERATOR_PENDING] = {
+  "Ctrl+[": CANCEL_OPERATOR,
+  "PASSTHROUGH": HANDLE_OPERATOR,
+};
+
 ACTION_MAP[Mode.INSERT] = {
   "Ctrl+[": EXIT_INSERT_MODE,
+};
+
+var COMMAND_MAP = {
+  "open": LOAD_URL,
+  "tabopen": NEW_TAB,
+  "reload": RELOAD,
+  "reloadAll": RELOAD_ALL,
 };
