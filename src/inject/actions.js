@@ -45,8 +45,50 @@ function EXIT_INSERT_MODE() {
   gMode = Mode.NORMAL;
 }
 
-function NEW_TAB() { openNewTab(); }
+function NEW_TAB() { openNewTab(""); }
 function PREVIOUS_TAB() { previousTab(); }
 function NEXT_TAB() { nextTab(); }
 function CLOSE_TAB() { closeTab(); }
 function REOPEN_LAST_CLOSED() { reopenLastClosed(); }
+
+function START_COMMAND() {
+  gMode = Mode.COMMAND;
+  gCommand.start();
+}
+
+function STOP_COMMAND() {
+  gCommand.stop();
+  gMode = Mode.NORMAL;
+}
+
+function EXECUTE_COMMAND() {
+  gCommand.execute();
+}
+
+function COMMAND_BACKSPACE() {
+  gCommand.handleBackspace();
+}
+
+function ADD_TO_COMMAND(ke, id) {
+  gCommand.handleNewCharacter(id);
+}
+
+function CMD_NEW_TAB() {
+  START_COMMAND();
+  gCommand.reset("tabopen ");
+}
+
+function CMD_NEW_TAB_RELATIVE() {
+  START_COMMAND();
+  gCommand.reset("tabopen " + document.URL);
+}
+
+function CMD_OPEN_TAB() {
+  START_COMMAND();
+  gCommand.reset("open ");
+}
+
+function CMD_OPEN_TAB_RELATIVE() {
+  START_COMMAND();
+  gCommand.reset("open " + document.URL);
+}

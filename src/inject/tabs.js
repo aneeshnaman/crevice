@@ -1,5 +1,5 @@
-function openNewTab() {
-  chrome.runtime.sendMessage(null, {cmd: "new-tab"});
+function openNewTab(url) {
+  chrome.runtime.sendMessage(null, {cmd: "new-tab", url: url});
 }
 
 function previousTab() {

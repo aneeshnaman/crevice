@@ -1,4 +1,4 @@
-function CommandLine(header) {
+function CommandInput(header) {
   this.header = header;
   this.boxElem = document.createElement("div");
   this.textElem = document.createTextNode("");
@@ -6,30 +6,36 @@ function CommandLine(header) {
   styleCommandDiv(this.boxElem);
 }
 
-CommandLine.prototype.show = function() {
+CommandInput.prototype.show = function() {
   this.boxElem.style.visibility = "visible";
 };
 
-CommandLine.prototype.hide = function() {
+CommandInput.prototype.hide = function() {
   this.boxElem.style.visibility = "hidden";
 };
 
-CommandLine.prototype.reset = function(pattern) {
+CommandInput.prototype.reset = function(pattern) {
   this.textElem.textContent = this.header + pattern;
 };
 
-CommandLine.prototype.install = function(container) {
+CommandInput.prototype.install = function(container) {
   container.appendChild(this.boxElem);
 };
 
 function styleCommandDiv(elem) {
-  elem.style.width = "100%";
+  elem.style.width = "500px";
   elem.style.padding = "0 5px";
+
+  elem.style.color = "#066";
+  elem.style.fontStyle = "italic";
+  elem.style.fontSize = "smaller";
 
   elem.style.background = "#efefef";
   elem.style.position = "fixed";
   elem.style.borderTop = "1px solid #aaa";
 
   elem.style.bottom = "0";
+  elem.style.right = "0";
   elem.style.visibility = "hidden";
 }
+

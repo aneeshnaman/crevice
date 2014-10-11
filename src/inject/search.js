@@ -97,7 +97,7 @@ function Searcher(rootElement) {
   this.searchNode = new SearchNode(rootElement);
   this.searchState = new SearchState();
   this.searchHighlight = new SearchHighlight();
-  this.searchBox = new CommandLine("/");
+  this.searchBox = new CommandInput("/");
 }
 
 Searcher.prototype.install = function(container) {

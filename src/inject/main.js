@@ -19,6 +19,9 @@ var gMode = Mode.NORMAL;
 var gSearcher = new Searcher(document.body);
 gSearcher.install(document.body);
 
+var gCommand = new CommandLine();
+gCommand.install(document.body);
+
 // Start key handler
 var gKeyHandler = new KeyHandler(ACTION_MAP);
 document.addEventListener("keydown", function(e) {
