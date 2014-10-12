@@ -4,12 +4,13 @@ function Hints() {
   this.hintSpans = [];
   this.currentChain = "";
   this.newWindow = false;
+  this.rootNode = null;
   this.idGenerator = new HintsIdGenerator(
     ['a', 's', 'd', 'f', 'j', 'k', 'l', 'w', 'e', 'r', 'u', 'i', 'y', 'n']);
 }
 
 Hints.prototype.install = function(node) {
-  this.focusableNodes = [];
+  this.rootNode = node;
   this.scan(node);
 };
 
@@ -23,13 +24,12 @@ Hints.prototype.scan = function(node) {
 };
 
 Hints.prototype.show = function(newWindow) {
-  var s = now();
   this.newWindow = newWindow;
   var inViewport = this.focusableNodes.filter(isNodeInViewport);
   var ids = this.idGenerator.generate(inViewport.length);
   var map = this.hintToNodeMap = mapTogether(ids, inViewport);
-  log(now() - s);
 
+  var rootNode = this.rootNode;
   var hintSpans = this.hintSpans = [];
   ids.forEach(function(id) {
     var span = document.createElement("span");
@@ -50,20 +50,21 @@ Hints.prototype.show = function(newWindow) {
     span.style.zIndex = "9999";
 
     var node = map[id];
+
     span.style.top = node.getBoundingClientRect().top + "px";
     span.style.left = node.getBoundingClientRect().left + "px";
 
-    node.appendChild(span);
+    rootNode.appendChild(span);
     hintSpans.push({id: id, span: span});
   });
-  log(now() - s);
 
   this.currentChain = "";
 };
 
 Hints.prototype.hide = function() {
+  var rootNode = this.rootNode;
   this.hintSpans.forEach(function(span) {
-    span.span.parentElement.removeChild(span.span);
+    rootNode.removeChild(span.span);
   });
   this.hintSpans = [];
 };
