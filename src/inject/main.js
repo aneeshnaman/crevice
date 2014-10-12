@@ -1,8 +1,5 @@
 /**
  * TODO
- * command line
- * t/o to open new tabs
- *
  * hints mode
  *
  * backwards search
@@ -23,7 +20,10 @@ gSearcher.install(document.body);
 var gCommand = new CommandLine(COMMAND_MAP);
 gCommand.install(document.body);
 
-gOp = new Operator();
+var gOp = new Operator();
+
+var gHints = new Hints();
+gHints.install(document.body);
 
 // Start key handler
 var gKeyHandler = new KeyHandler(ACTION_MAP);

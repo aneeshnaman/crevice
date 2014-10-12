@@ -74,7 +74,7 @@ function isFocusable(node) {
       node instanceof HTMLTextAreaElement ||
       node instanceof HTMLButtonElement) &&
      node.getAttribute("disabled") != null) ||
-    isNumber(node.getAttribute("tabindex"));
+    (node.getAttribute && isNumber(node.getAttribute("tabindex")));
 }
 
 function getFocusableAncestor(node) {
@@ -94,3 +94,54 @@ function fixUrl(url) {
     return "http://" + url;
   }
 }
+
+function isNodeInViewport(node) {
+  if (!node instanceof Element || !node instanceof Text) return false;
+
+  var rect = node.getBoundingClientRect();
+  return rect.bottom > 0 &&
+    rect.right > 0 &&
+    rect.left < (window.innerWidth || document. documentElement.clientWidth) &&
+    rect.top < (window.innerHeight || document. documentElement.clientHeight);
+}
+
+function map(list, mapper) {
+  var result = [];
+  list.forEach(function(element) {
+    result[element]  = mapper(element);
+  });
+  return result;
+}
+
+function transform(list, mapper) {
+  var result = [];
+  list.forEach(function(element) {
+    result.push(mapper(element));
+  });
+  return result;
+}
+
+function mapTogether(from, to) {
+  if (from.length != to.length) return null;
+  var result = {};
+  for (var i = 0; i < from.length; ++i) {
+    result[from[i]] = to[i];
+  }
+  return result;
+}
+
+function invertMap(map) {
+  var result = {};
+  for (var v in map) {
+    result[map[v]] = v;
+  }
+  return result;
+}
+
+function str(c, length) {
+  var s = "";
+  for (var i = 0; i < length; ++i) {
+    s += c;
+  }
+  return s;
+};

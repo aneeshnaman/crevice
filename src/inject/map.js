@@ -5,6 +5,7 @@ var Mode = {
   INSERT: "insert",
   COMMAND: "command",
   OPERATOR_PENDING: "operator_pending",
+  HINTS: "hints",
 };
 
 var ACTION_MAP = {};
@@ -45,6 +46,7 @@ ACTION_MAP[Mode.NORMAL] = {
   "O": CMD_OPEN_TAB_RELATIVE,
   "m": START_OPERATOR,
   "'": START_OPERATOR,
+  "f": START_HINTS,
 };
 
 ACTION_MAP[Mode.SEARCH] = {
@@ -64,6 +66,11 @@ ACTION_MAP[Mode.COMMAND] = {
 ACTION_MAP[Mode.OPERATOR_PENDING] = {
   "Ctrl+[": CANCEL_OPERATOR,
   "PASSTHROUGH": HANDLE_OPERATOR,
+};
+
+ACTION_MAP[Mode.HINTS] = {
+  "Ctrl+[": CANCEL_HINTS,
+  "PASSTHROUGH": HANDLE_HINT_INPUT,
 };
 
 ACTION_MAP[Mode.INSERT] = {

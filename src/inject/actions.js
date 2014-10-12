@@ -109,3 +109,17 @@ function HANDLE_OPERATOR(ke, id) {
   gOp.handle(id);
   gMode = Mode.NORMAL;
 }
+
+function START_HINTS() {
+  gMode = Mode.HINTS;
+  gHints.show();
+}
+
+function CANCEL_HINTS() {
+  gHints.hide();
+  gMode = Mode.NORMAL;
+}
+
+function HANDLE_HINT_INPUT(ke, id) {
+  gHints.handle(id);
+}
