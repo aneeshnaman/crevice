@@ -1,6 +1,5 @@
 /**
  * TODO
- * hints mode
  *
  * backwards search
  * search history

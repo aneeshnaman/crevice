@@ -5,7 +5,7 @@ function Hints() {
   this.currentChain = "";
   this.newWindow = false;
   this.idGenerator = new HintsIdGenerator(
-    ['a', 's', 'd', 'f', 'j', 'k', 'l', 'w', 'e', 'r', 'u', 'i']);
+    ['a', 's', 'd', 'f', 'j', 'k', 'l', 'w', 'e', 'r', 'u', 'i', 'y', 'n']);
 }
 
 Hints.prototype.install = function(node) {
@@ -101,6 +101,7 @@ Hints.prototype.execute = function(node) {
   }
 }
 
+// for simplicity this assumes that we won't need to go beyond three letters.
 function HintsIdGenerator(letters) {
   this.letters = letters;
   this.positions = map(letters, function(letter) {
@@ -108,24 +109,47 @@ function HintsIdGenerator(letters) {
   });
 }
 
-// todo: no id should be prefix of another.
 HintsIdGenerator.prototype.generate = function(num) {
-  var ids = ['aa'];
+  var ids = [str(this.letters[0], 2)];  // seed, e.g. "aa"
   while (ids.length < num) {
     var id = last(ids);
     var pos = id.length - 1;
     for (pos = id.length - 1; pos >= 0; --pos) {
-      if (id[pos] != last(this.letters)) {
+      if (id[pos] != this.lastAllowed(id.length, pos)) {
         ids.push(
             id.substr(0, pos) +
             this.letters[this.positions[id[pos]] + 1] +
             str(this.letters[0], max(0, id.length - pos - 1)));
         break;
+      } else if (pos == 0) {
+        ids.push(this.firstAllowed(id.length + 1, pos)
+            + str(this.letters[0], id.length));
       }
-    }
-    if (pos < 0) {
-      ids.push(str(this.letters[0], id.length + 1));
     }
   }
   return ids;
+};
+
+HintsIdGenerator.prototype.firstAllowed = function(length, pos) {
+  if (pos != 0) {
+    return this.letters[0];
+  }
+
+  if (length == 2) {
+    return this.letters[0];
+  } else {
+    return this.letters[Math.floor(this.letters.length / 2) + 1];
+  }
+};
+
+HintsIdGenerator.prototype.lastAllowed = function(length, pos) {
+  if (pos != 0) {
+    return last(this.letters);
+  }
+
+  if (length == 2) {
+    return this.letters[Math.floor(this.letters.length / 2)];
+  } else {
+    return last(this.letters);
+  }
 };
