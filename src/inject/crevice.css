@@ -1,0 +1,13 @@
+.hint-span {
+  background: "yellow";
+  border-radius: "3px";
+  border: "1px solid orange";
+  box-shadow: "1px 1px 5px #aaa";
+  color: "black";
+  display: "block";
+  font-size: "11px";
+  font-weight: "bold";
+  line-height: "100%";
+  padding: "1px 3px 0 3px";
+  position: "fixed";
+}
