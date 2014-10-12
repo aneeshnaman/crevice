@@ -112,7 +112,12 @@ function HANDLE_OPERATOR(ke, id) {
 
 function START_HINTS() {
   gMode = Mode.HINTS;
-  gHints.show();
+  gHints.show(false);
+}
+
+function START_HINTS_NEW_WINDOW() {
+  gMode = Mode.HINTS;
+  gHints.show(true);
 }
 
 function CANCEL_HINTS() {
@@ -121,5 +126,7 @@ function CANCEL_HINTS() {
 }
 
 function HANDLE_HINT_INPUT(ke, id) {
-  gHints.handle(id);
+  if (gHints.handle(id)) {
+    gMode = Mode.NORMAL;
+  }
 }
