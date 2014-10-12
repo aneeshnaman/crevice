@@ -108,6 +108,7 @@ function HintsIdGenerator(letters) {
   });
 }
 
+// todo: no id should be prefix of another.
 HintsIdGenerator.prototype.generate = function(num) {
   var ids = ['aa'];
   while (ids.length < num) {
