@@ -49,8 +49,8 @@ function styleCommandDiv(elem) {
 function styleTextBox(elem) {
   elem.style.width = "100%";
 
-  elem.style.color = "#666";
-  elem.style.fontSize = "smaller";
+  elem.style.color = "#333";
+  elem.style.fontSize = "13px";
 
   elem.style.background = "#efefef";
   elem.style.borderWidth = "0";
