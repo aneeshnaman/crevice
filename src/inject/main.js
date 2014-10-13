@@ -20,6 +20,7 @@
  *
  * z: change page zoom
  *
+ * launch gvim and paste text
  */
 
 var gMode = Mode.NORMAL;
