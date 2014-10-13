@@ -8,6 +8,18 @@
  * UI hints for current mode
  *
  * cmd-line tab completion
+ *
+ * follow previous/next links on <</>>
+ *
+ * y: yank current url or selected link's href or selected text
+ * p/P: open url in clipboard (new tab)
+ *
+ * marks for urls
+ *
+ * b: go to tab using url/title etc.
+ *
+ * z: change page zoom
+ *
  */
 
 var gMode = Mode.NORMAL;
