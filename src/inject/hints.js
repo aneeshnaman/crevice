@@ -83,6 +83,15 @@ Hints.prototype.handle = function(id) {
     if (!startsWith(span.id, currentChain)) {
       span.span.style.visibility = "hidden";
     } else {
+      var first = document.createElement("span");
+      first.textContent = currentChain.toUpperCase();
+      first.style.color = "rgb(215, 200, 70)";
+      var second = document.createElement("span");
+      second.textContent = span.id.substr(currentChain.length).toUpperCase();
+      span.span.innerHTML = "";
+      span.span.appendChild(first);
+      span.span.appendChild(second);
+
       found = true;
     }
   });
@@ -128,7 +137,7 @@ HintsIdGenerator.prototype.generate = function(num) {
       }
     }
   }
-  return ids;
+  return shuffleArray(ids);
 };
 
 HintsIdGenerator.prototype.firstAllowed = function(length, pos) {
