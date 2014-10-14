@@ -1,6 +1,10 @@
 /**
  * TODO
  *
+ * user options for disabling on specific sites
+ *
+ * per-site passthrough for specific keys, e.g. 'u' in critique.
+ *
  * backwards search
  * search history
  * search hints in scrollbar
