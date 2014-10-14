@@ -21,3 +21,15 @@ function reopenLastClosed() {
 function reloadAll() {
   chrome.runtime.sendMessage(null, {cmd: "reload-all"});
 }
+
+function zoomUp() {
+  chrome.runtime.sendMessage(null, {cmd: "zoom-up"});
+}
+
+function zoomDown() {
+  chrome.runtime.sendMessage(null, {cmd: "zoom-down"});
+}
+
+function zoomDefault() {
+  chrome.runtime.sendMessage(null, {cmd: "zoom-default"});
+}

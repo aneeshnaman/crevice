@@ -20,6 +20,16 @@ chrome.runtime.onMessage.addListener(
               console.log(tabs);
               tabs.forEach(function(tab) { chrome.tabs.reload(tab.id); });
             });
+      } else if (request.cmd == "zoom-up") {
+        chrome.tabs.getZoom(sender.tab.id, function(z) {
+          chrome.tabs.setZoom(sender.tab.id, z * 1.1);
+        });
+      } else if (request.cmd == "zoom-down") {
+        chrome.tabs.getZoom(sender.tab.id, function(z) {
+          chrome.tabs.setZoom(sender.tab.id, z / 1.1);
+        });
+      } else if (request.cmd == "zoom-default") {
+        chrome.tabs.setZoom(sender.tab.id, 1.0);
       }
     });
 

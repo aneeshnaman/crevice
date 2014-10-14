@@ -7,6 +7,10 @@ function PAGE_UP(ke, id) { scrollBy(0, -500); }
 function PAGE_HALF_DOWN(ke, id) { scrollBy(0, 250); }
 function PAGE_HALF_UP(ke, id) { scrollBy(0, -250); }
 
+function ZOOM_UP() { zoomUp(); }
+function ZOOM_DOWN() { zoomDown(); }
+function ZOOM_DEFAULT() { zoomDefault(); }
+
 function START_SEARCH(ke, id) {
   gMode = Mode.SEARCH;
   gSearcher.startSearch();

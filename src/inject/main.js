@@ -5,6 +5,8 @@
  * search history
  * search hints in scrollbar
  *
+ * b: go to tab using url/title etc.
+ *
  * UI hints for current mode
  *
  * cmd-line tab completion
@@ -15,10 +17,6 @@
  * p/P: open url in clipboard (new tab)
  *
  * marks for urls
- *
- * b: go to tab using url/title etc.
- *
- * z: change page zoom
  *
  * launch gvim and paste text
  */

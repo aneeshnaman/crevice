@@ -48,6 +48,9 @@ ACTION_MAP[Mode.NORMAL] = {
   "'": START_OPERATOR,
   "f": START_HINTS,
   "F": START_HINTS_NEW_WINDOW,
+  "z_k": ZOOM_UP,
+  "z_j": ZOOM_DOWN,
+  "z_0": ZOOM_DEFAULT,
 };
 
 ACTION_MAP[Mode.SEARCH] = {
