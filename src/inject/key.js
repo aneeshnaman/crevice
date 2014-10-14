@@ -21,6 +21,7 @@ function getKey(keyCode, shiftKey) {
     return {
       8: '<bksp>',
       13: '<ret>',
+      27: '<esc>',
       32: ' ',
       186: ';',
       187: '=',

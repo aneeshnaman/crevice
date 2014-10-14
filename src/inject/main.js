@@ -7,7 +7,7 @@
  *
  * b: go to tab using url/title etc.
  *
- * UI hints for current mode
+ * UI hints for current mode: DISABLED, OPERATOR PENDING
  *
  * cmd-line tab completion
  *
