@@ -40,7 +40,8 @@
         "src/inject/operator.js",
         "src/inject/map.js",
         "src/inject/main.js"
-      ]
+      ],
+      "run_at": "document_start"
     }
   ]
 }

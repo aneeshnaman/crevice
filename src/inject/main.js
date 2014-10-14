@@ -24,21 +24,28 @@
  */
 
 var gMode = Mode.NORMAL;
-
-// Add search box
-var gSearcher = new Searcher(document.body);
-gSearcher.install(document.body);
-
+var gSearcher = new Searcher();
 var gCommand = new CommandLine(COMMAND_MAP);
-gCommand.install(document.body);
-
 var gOp = new Operator();
-
 var gHints = new Hints();
-gHints.install(document.body);
+var gKeyHandler = new KeyHandler(ACTION_MAP);
+
+function init() {
+  log("initing modules");
+  gSearcher.install(document.body);
+  gCommand.install(document.body);
+  gHints.install(document.body);
+}
+
+(function() {
+  var ID = window.setInterval(function() {
+    if (!document.body) return;
+    window.clearInterval(ID);
+    init();
+  }, 100);
+})();
 
 // Start key handler
-var gKeyHandler = new KeyHandler(ACTION_MAP);
 document.addEventListener("keydown", function(e) {
   gKeyHandler.handleEvent(e, gMode);
 });

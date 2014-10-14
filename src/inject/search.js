@@ -91,17 +91,18 @@ SearchHighlight.prototype.getHighlightedSpans = function() {
   return spans;
 };
 
-function Searcher(rootElement) {
-  this.rootElement = rootElement;
-
-  this.searchNode = new SearchNode(rootElement);
+function Searcher() {
   this.searchState = new SearchState();
   this.searchHighlight = new SearchHighlight();
   this.searchBox = new CommandInput("/");
+
+  this.searchNode = null;
+  this.rootNode = null;
 }
 
-Searcher.prototype.install = function(container) {
-  this.searchBox.install(container);
+Searcher.prototype.install = function(rootNode) {
+  this.rootNode = rootNode;
+  this.searchBox.install(rootNode);
 };
 
 Searcher.prototype.reset = function(pattern) {
@@ -110,6 +111,9 @@ Searcher.prototype.reset = function(pattern) {
 };
 
 Searcher.prototype.startSearch = function() {
+  var s = now();
+  this.searchNode = new SearchNode(this.rootNode);
+  log("search: ", now() - s);
   this.reset("");
   this.searchBox.show();
 };

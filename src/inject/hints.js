@@ -11,7 +11,14 @@ function Hints() {
 
 Hints.prototype.install = function(node) {
   this.rootNode = node;
-  this.scan(node);
+  this.rescan();
+};
+
+Hints.prototype.rescan = function(node) {
+  this.focusableNodes = [];
+  var s = now();
+  this.scan(this.rootNode);
+  log("hints: ", now() - s);
 };
 
 Hints.prototype.scan = function(node) {
@@ -24,6 +31,8 @@ Hints.prototype.scan = function(node) {
 };
 
 Hints.prototype.show = function(newWindow) {
+  this.rescan();
+
   this.newWindow = newWindow;
   var inViewport = this.focusableNodes.filter(isNodeInViewport);
   var ids = this.idGenerator.generate(inViewport.length);
@@ -120,6 +129,8 @@ function HintsIdGenerator(letters) {
 }
 
 HintsIdGenerator.prototype.generate = function(num) {
+  if (num == 0) return [];
+
   var ids = [str(this.letters[0], 2)];  // seed, e.g. "aa"
   while (ids.length < num) {
     var id = last(ids);
