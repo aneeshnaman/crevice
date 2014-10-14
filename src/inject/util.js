@@ -155,3 +155,7 @@ function shuffleArray(array) {
   }
   return array;
 }
+
+function isScrollable(elem) {
+  return isVisible(elem) && elem.scrollHeight > elem.offsetHeight;
+}

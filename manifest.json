@@ -26,6 +26,7 @@
         "src/inject/util.js",
         "src/inject/input_nodes.js",
         "src/inject/actions.js",
+        "src/inject/scroll.js",
         "src/inject/key.js",
         "src/inject/keyhandler.js",
         "src/inject/hints.js",

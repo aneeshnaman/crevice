@@ -1,11 +1,11 @@
-function SCROLL_DOWN(ke, id) { window.scrollBy(0, 100); }
-function SCROLL_UP(ke, id) { window.scrollBy(0, -100); }
-function SCROLL_TOP(ke, id) { window.scrollTo(0, 0); }
-function SCROLL_BOTTOM(ke, id) { window.scrollTo(0, document.body.scrollHeight); }
-function PAGE_DOWN(ke, id) { window.scrollBy(0, 500); }
-function PAGE_UP(ke, id) { window.scrollBy(0, -500); }
-function PAGE_HALF_DOWN(ke, id) { window.scrollBy(0, 250); }
-function PAGE_HALF_UP(ke, id) { window.scrollBy(0, -250); }
+function SCROLL_DOWN(ke, id) { scrollBy(0, 100); }
+function SCROLL_UP(ke, id) { scrollBy(0, -100); }
+function SCROLL_TOP(ke, id) { scrollTo(0, 0); }
+function SCROLL_BOTTOM(ke, id) { scrollTo(0, 100000); }
+function PAGE_DOWN(ke, id) { scrollBy(0, 500); }
+function PAGE_UP(ke, id) { scrollBy(0, -500); }
+function PAGE_HALF_DOWN(ke, id) { scrollBy(0, 250); }
+function PAGE_HALF_UP(ke, id) { scrollBy(0, -250); }
 
 function START_SEARCH(ke, id) {
   gMode = Mode.SEARCH;
