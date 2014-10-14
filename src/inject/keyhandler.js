@@ -31,7 +31,7 @@ KeyHandler.prototype.handleKey = function(ke, mode) {
   } else {
     if (hasKeyStartingWith(this.actionMap[mode], id)) {
       // something more can happen, wait...
-      return false;
+      return true;
     }
     // nothing more can happen. now see if any suffix of the current event-seq
     // is a valid key combo, and execute that.
