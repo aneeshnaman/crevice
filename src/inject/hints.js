@@ -115,6 +115,8 @@ Hints.prototype.handle = function(id) {
 Hints.prototype.execute = function(node) {
   if (node instanceof HTMLAnchorElement && node.href && this.newWindow) {
     NEW_TAB(node.href);
+  } else if (isTextInput(node)) {
+    node.focus();
   } else {
     node.click();
   }
