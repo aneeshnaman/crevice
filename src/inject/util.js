@@ -53,6 +53,13 @@ function isTextInput(node) {
   if (node instanceof HTMLInputElement && isInputTypeText(node.type)) return true;
   if (node instanceof HTMLTextAreaElement) return true;
 
+  var userModify = node.style["-webkit-user-modify"];
+  if (userModify == "read-write" || userModify == "read-write-plaintext-only") {
+    return true;
+  }
+
+  if (node.parentElement && isTextInput(node.parentElement)) return true;
+
   return false;
 }
 
