@@ -12,8 +12,7 @@
     "history",
     "tabs",
     "sessions",
-    "https://*/*",
-    "http://*/*"
+    "<all_urls>"
   ],
   "background": {
     "scripts": ["src/background.js"]

@@ -58,6 +58,8 @@ function isTextInput(node) {
     return true;
   }
 
+  if (node.isContentEditable) return true;
+
   if (node.parentElement && isTextInput(node.parentElement)) return true;
 
   return false;
