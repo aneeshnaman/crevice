@@ -30,6 +30,10 @@ chrome.runtime.onMessage.addListener(
         });
       } else if (request.cmd == "zoom-default") {
         chrome.tabs.setZoom(sender.tab.id, 1.0);
+      } else if (request.cmd == "move-tab-before") {
+        chrome.tabs.move(sender.tab.id, {index: sender.tab.index - 1});
+      } else if (request.cmd == "move-tab-after") {
+        chrome.tabs.move(sender.tab.id, {index: sender.tab.index + 1});
       }
     });
 

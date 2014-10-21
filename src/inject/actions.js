@@ -56,6 +56,8 @@ function PREVIOUS_TAB() { previousTab(); }
 function NEXT_TAB() { nextTab(); }
 function CLOSE_TAB() { closeTab(); }
 function REOPEN_LAST_CLOSED() { reopenLastClosed(); }
+function MOVE_TAB_BEFORE() { moveTabBefore(); }
+function MOVE_TAB_AFTER() { moveTabAfter(); }
 
 function START_COMMAND() {
   gMode = Mode.COMMAND;

@@ -33,3 +33,11 @@ function zoomDown() {
 function zoomDefault() {
   chrome.runtime.sendMessage(null, {cmd: "zoom-default"});
 }
+
+function moveTabBefore() {
+  chrome.runtime.sendMessage(null, {cmd: "move-tab-before"});
+}
+
+function moveTabAfter() {
+  chrome.runtime.sendMessage(null, {cmd: "move-tab-after"});
+}

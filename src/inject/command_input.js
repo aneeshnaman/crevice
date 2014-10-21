@@ -44,6 +44,7 @@ function styleCommandDiv(elem) {
 
   elem.style.borderTop = "1px solid #aaa";
   elem.style.background = "#efefef";
+  elem.style.zIndex = "99999";
 }
 
 function styleTextBox(elem) {
