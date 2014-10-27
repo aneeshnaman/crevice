@@ -2,7 +2,6 @@
  * TODO
  *
  * user options for disabling on specific sites
- * per-site passthrough for specific keys, e.g. 'u' in critique.
  * make commandline t/o more useful, e.g. "define abc" doesn't work.
  *
  * backwards search
