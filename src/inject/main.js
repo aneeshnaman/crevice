@@ -24,35 +24,46 @@
  * launch gvim and paste text
  */
 
+var Crevice = {};
+
+function main() {
+  Crevice.mode = Mode.NORMAL;
+  Crevice.searcher = new Searcher();
+  Crevice.command = new CommandLine(COMMAND_MAP);
+  Crevice.op = new Operator();
+  Crevice.hints = new Hints();
+  Crevice.keyHandler = new KeyHandler(ACTION_MAP, IGNORE_MAP);
+
+  Crevice.install = function() {
+    log("installing modules");
+    Crevice.searcher.install(document.body);
+    Crevice.command.install(document.body);
+    Crevice.hints.install(document.body);
+  };
+
+  (function() {
+    var ID = window.setInterval(function() {
+      if (!document.body) return;
+      window.clearInterval(ID);
+      Crevice.install();
+    }, 100);
+  })();
+
+  // Start key handler
+  document.addEventListener("keydown", function(e) {
+    Crevice.keyHandler.handleEvent(e, Crevice.mode);
+  });
+}
+
+var excludeUrl = false;
 EXCLUDE_LIST.forEach(function(pattern) {
   if (document.URL.match(pattern)) {
-    throw new Error('early exit');
+    excludeUrl = true;
   }
 });
 
-var gMode = Mode.NORMAL;
-var gSearcher = new Searcher();
-var gCommand = new CommandLine(COMMAND_MAP);
-var gOp = new Operator();
-var gHints = new Hints();
-var gKeyHandler = new KeyHandler(ACTION_MAP, IGNORE_MAP);
-
-function init() {
-  log("initing modules");
-  gSearcher.install(document.body);
-  gCommand.install(document.body);
-  gHints.install(document.body);
+if (excludeUrl) {
+  log("Skipping this url...");
+} else {
+  main();
 }
-
-(function() {
-  var ID = window.setInterval(function() {
-    if (!document.body) return;
-    window.clearInterval(ID);
-    init();
-  }, 100);
-})();
-
-// Start key handler
-document.addEventListener("keydown", function(e) {
-  gKeyHandler.handleEvent(e, gMode);
-});

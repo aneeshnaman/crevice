@@ -12,28 +12,28 @@ function ZOOM_DOWN() { zoomDown(); }
 function ZOOM_DEFAULT() { zoomDefault(); }
 
 function START_SEARCH(ke, id) {
-  gMode = Mode.SEARCH;
-  gSearcher.startSearch();
+  Crevice.mode = Mode.SEARCH;
+  Crevice.searcher.startSearch();
 }
 
 function STOP_SEARCH(ke, id) {
-  gMode = Mode.NORMAL;
-  gSearcher.stopSearch();
+  Crevice.mode = Mode.NORMAL;
+  Crevice.searcher.stopSearch();
 }
 
 function STOP_AND_SEARCH_NEXT(ke, id) {
-  gMode = Mode.NORMAL;
-  gSearcher.stopSearch();
-  gSearcher.searchNext();
+  Crevice.mode = Mode.NORMAL;
+  Crevice.searcher.stopSearch();
+  Crevice.searcher.searchNext();
 }
 
-function ADD_TO_SEARCH(ke, id) { gSearcher.handleNewCharacter(id); }
-function SEARCH_NEXT(ke, id) { gSearcher.searchNext(); }
-function SEARCH_BACK(ke, id) { gSearcher.searchBack(); }
-function SEARCH_BACKSPACE(ke, id) { gSearcher.handleBackspace(); }
+function ADD_TO_SEARCH(ke, id) { Crevice.searcher.handleNewCharacter(id); }
+function SEARCH_NEXT(ke, id) { Crevice.searcher.searchNext(); }
+function SEARCH_BACK(ke, id) { Crevice.searcher.searchBack(); }
+function SEARCH_BACKSPACE(ke, id) { Crevice.searcher.handleBackspace(); }
 
-function ENABLE_CREVICE(ke, id) { gMode = Mode.NORMAL; }
-function DISABLE_CREVICE(ke, id) { gMode = Mode.DISABLED; }
+function ENABLE_CREVICE(ke, id) { Crevice.mode = Mode.NORMAL; }
+function DISABLE_CREVICE(ke, id) { Crevice.mode = Mode.DISABLED; }
 
 function HISTORY_BACK() { window.history.back(); }
 function HISTORY_FORWARD() { window.history.forward(); }
@@ -47,7 +47,7 @@ function EXIT_INSERT_MODE() {
   if (isTextInput(document.activeElement)) {
     document.activeElement.blur();
   }
-  gMode = Mode.NORMAL;
+  Crevice.mode = Mode.NORMAL;
 }
 
 function LOAD_URL(url) { window.location = fixUrl(url); }
@@ -60,80 +60,80 @@ function MOVE_TAB_BEFORE() { moveTabBefore(); }
 function MOVE_TAB_AFTER() { moveTabAfter(); }
 
 function START_COMMAND() {
-  gMode = Mode.COMMAND;
-  gCommand.start();
+  Crevice.mode = Mode.COMMAND;
+  Crevice.command.start();
 }
 
 function STOP_COMMAND() {
-  gCommand.stop();
-  gMode = Mode.NORMAL;
+  Crevice.command.stop();
+  Crevice.mode = Mode.NORMAL;
 }
 
 function EXECUTE_COMMAND() {
   STOP_COMMAND();
-  gCommand.execute();
+  Crevice.command.execute();
 }
 
 function COMMAND_BACKSPACE() {
-  gCommand.handleBackspace();
+  Crevice.command.handleBackspace();
 }
 
 function ADD_TO_COMMAND(ke, id) {
-  gCommand.handleNewCharacter(id);
+  Crevice.command.handleNewCharacter(id);
 }
 
 function CMD_NEW_TAB() {
   START_COMMAND();
-  gCommand.reset("tabopen ");
+  Crevice.command.reset("tabopen ");
 }
 
 function CMD_NEW_TAB_RELATIVE() {
   START_COMMAND();
-  gCommand.reset("tabopen " + document.URL);
+  Crevice.command.reset("tabopen " + document.URL);
 }
 
 function CMD_OPEN_TAB() {
   START_COMMAND();
-  gCommand.reset("open ");
+  Crevice.command.reset("open ");
 }
 
 function CMD_OPEN_TAB_RELATIVE() {
   START_COMMAND();
-  gCommand.reset("open " + document.URL);
+  Crevice.command.reset("open " + document.URL);
 }
 
 function START_OPERATOR(ke, id) {
-  gMode = Mode.OPERATOR_PENDING;
-  gOp.start(id);
+  Crevice.mode = Mode.OPERATOR_PENDING;
+  Crevice.op.start(id);
 }
 
 function CANCEL_OPERATOR() {
-  gOp.cancel();
-  gMode = Mode.NORMAL;
+  Crevice.op.cancel();
+  Crevice.mode = Mode.NORMAL;
 }
 
 function HANDLE_OPERATOR(ke, id) {
-  gOp.handle(id);
-  gMode = Mode.NORMAL;
+  Crevice.op.handle(id);
+  Crevice.mode = Mode.NORMAL;
 }
 
 function START_HINTS() {
-  gMode = Mode.HINTS;
-  gHints.show(false);
+  Crevice.mode = Mode.HINTS;
+  Crevice.hints.show(false);
 }
 
 function START_HINTS_NEW_WINDOW() {
-  gMode = Mode.HINTS;
-  gHints.show(true);
+  Crevice.mode = Mode.HINTS;
+  Crevice.hints.show(true);
 }
 
 function CANCEL_HINTS() {
-  gHints.hide();
-  gMode = Mode.NORMAL;
+  Crevice.hints.hide();
+  Crevice.mode = Mode.NORMAL;
 }
 
 function HANDLE_HINT_INPUT(ke, id) {
-  if (gHints.handle(id)) {
-    gMode = Mode.NORMAL;
+  if (Crevice.hints.handle(id)) {
+    Crevice.mode = Mode.NORMAL;
   }
 }
