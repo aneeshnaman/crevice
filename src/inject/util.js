@@ -11,6 +11,10 @@ function last(list) {
   return list[list.length -1];
 }
 
+function arrayContains(list, elem) {
+  return list.indexOf(elem) >= 0;
+}
+
 function startsWith(str, prefix) {
   return str.indexOf(prefix) == 0;
 }
@@ -45,8 +49,9 @@ function min(a, b) {
 }
 
 function isInputTypeText(type) {
-  return ["email", "number", "password", "search", "tel", "text", "url"]
-    .indexOf(type) >= 0;
+  return arrayContains(
+      ["email", "number", "password", "search", "tel", "text", "url"],
+      type);
 }
 
 function isTextInput(node) {

@@ -1,6 +1,7 @@
-function KeyHandler(actionMap, ignoreMap) {
+function KeyHandler(actionMap, ignoreMap, enableMap) {
   this.actionMap = actionMap;
   this.ignoreMap = ignoreMap;
+  this.enableMap = enableMap;
   this.eventChain = [];
 }
 
@@ -26,11 +27,25 @@ KeyHandler.prototype.handleKey = function(ke, mode) {
   this.eventChain.push(ke);
   var id = chainId(this.eventChain);
   log(this.eventChain, id);
-  for (var pattern in this.ignoreMap) {
-    if (document.URL.match(pattern) && this.ignoreMap[pattern].indexOf(id) >= 0) {
+
+  // If url in enable-map, ignore all keys that don't match its list
+  for (var pattern in this.enableMap) {
+    if (document.URL.match(pattern) &&
+        !arrayContains(this.enableMap[pattern], id)) {
+      log("This key not enabled for this URL. Ignoring...");
       return false;
     }
   }
+
+  // If url in ignore-map, ignore all keys that match its list
+  for (var pattern in this.ignoreMap) {
+    if (document.URL.match(pattern) &&
+        arrayContains(this.ignoreMap[pattern], id)) {
+      log("This key not enabled for this URL. Ignoring...");
+      return false;
+    }
+  }
+
   if (this.executeAction(ke, id, mode)) {
     this.eventChain = [];
     return true;

@@ -99,7 +99,22 @@ var IGNORE_MAP = {
   ".*critique.corp.google.com.*": ["u", "r"]
 };
 
-var EXCLUDE_LIST = [
-  ".*mail.google.com.*",
-  ".*drive.google.com.*"
+var TAB_KEYS = [
+    "Ctrl+H",
+    "Ctrl+L",
+    "Ctrl+<",
+    "Ctrl+>",
+    "g_T",
+    "g_t",
+    "d"
 ];
+
+var ENABLE_MAP = {
+  ".*zazzle.com.*": TAB_KEYS,
+  ".*mail.google.com.*": TAB_KEYS,
+  ".*drive.google.com.*": TAB_KEYS,
+  ".*sites.google.com.*": TAB_KEYS,
+  ".*google.com/calendar.*": TAB_KEYS,
+};
+
+var BLACKLISTED_URLS = [];

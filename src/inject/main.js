@@ -31,7 +31,7 @@ function main() {
   Crevice.command = new CommandLine(COMMAND_MAP);
   Crevice.op = new Operator();
   Crevice.hints = new Hints();
-  Crevice.keyHandler = new KeyHandler(ACTION_MAP, IGNORE_MAP);
+  Crevice.keyHandler = new KeyHandler(ACTION_MAP, IGNORE_MAP, ENABLE_MAP);
 
   Crevice.install = function() {
     log("installing modules");
@@ -55,7 +55,7 @@ function main() {
 }
 
 var excludeUrl = false;
-EXCLUDE_LIST.forEach(function(pattern) {
+BLACKLISTED_URLS.forEach(function(pattern) {
   if (document.URL.match(pattern)) {
     excludeUrl = true;
   }
