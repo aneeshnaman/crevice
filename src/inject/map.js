@@ -53,6 +53,8 @@ ACTION_MAP[Mode.NORMAL] = {
   "z_k": ZOOM_UP,
   "z_j": ZOOM_DOWN,
   "z_0": ZOOM_DEFAULT,
+  "x_k": INCREASE_BODY_MARGIN,
+  "x_j": DECREASE_BODY_MARGIN,
 };
 
 ACTION_MAP[Mode.SEARCH] = {

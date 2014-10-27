@@ -137,3 +137,28 @@ function HANDLE_HINT_INPUT(ke, id) {
     Crevice.mode = Mode.NORMAL;
   }
 }
+
+function INCREASE_BODY_MARGIN() {
+  setBodyMarginEm(function(current) { return current + 5; });
+}
+
+function DECREASE_BODY_MARGIN() {
+  setBodyMarginEm(function(current) {
+    // leave some margin always
+    return current - 5 <= 0 ? 1 : current - 5;
+  });
+}
+
+function setBodyMarginEm(callback) {
+  var marginLeft = document.body.style.marginLeft;
+  if (marginLeft && !isNumber(parseFloat(marginLeft))) {
+    log("Not changing margin. Current is some non-number value: ", marginLeft);
+    return;
+  }
+
+  var currentMargin = marginLeft ? parseFloat(marginLeft) : 0;
+  var newMargin = callback(currentMargin) + "em";
+
+  document.body.style.marginLeft = newMargin;
+  document.body.style.marginRight = newMargin;
+}
