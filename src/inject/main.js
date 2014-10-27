@@ -1,7 +1,8 @@
 /**
  * TODO
  *
- * user options for disabling on specific sites
+ * wrap tab moves around the first/last tabs
+ *
  * make commandline t/o more useful, e.g. "define abc" doesn't work.
  *
  * backwards search
