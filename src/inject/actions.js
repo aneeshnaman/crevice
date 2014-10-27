@@ -70,6 +70,7 @@ function STOP_COMMAND() {
 }
 
 function EXECUTE_COMMAND() {
+  STOP_COMMAND();
   gCommand.execute();
 }
 
