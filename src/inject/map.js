@@ -94,3 +94,7 @@ var COMMAND_MAP = {
   "reload": RELOAD,
   "reloadAll": RELOAD_ALL,
 };
+
+var IGNORE_MAP = {
+  ".*critique.corp.google.com.*": ["u", "r"]
+};

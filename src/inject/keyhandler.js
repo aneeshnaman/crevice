@@ -1,5 +1,6 @@
-function KeyHandler(actionMap) {
+function KeyHandler(actionMap, ignoreMap) {
   this.actionMap = actionMap;
+  this.ignoreMap = ignoreMap;
   this.eventChain = [];
 }
 
@@ -25,6 +26,11 @@ KeyHandler.prototype.handleKey = function(ke, mode) {
   this.eventChain.push(ke);
   var id = chainId(this.eventChain);
   log(this.eventChain, id);
+  for (var pattern in this.ignoreMap) {
+    if (document.URL.match(pattern) && this.ignoreMap[pattern].indexOf(id) >= 0) {
+      return false;
+    }
+  }
   if (this.executeAction(ke, id, mode)) {
     this.eventChain = [];
     return true;

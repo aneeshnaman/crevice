@@ -30,7 +30,7 @@ var gSearcher = new Searcher();
 var gCommand = new CommandLine(COMMAND_MAP);
 var gOp = new Operator();
 var gHints = new Hints();
-var gKeyHandler = new KeyHandler(ACTION_MAP);
+var gKeyHandler = new KeyHandler(ACTION_MAP, IGNORE_MAP);
 
 function init() {
   log("initing modules");
