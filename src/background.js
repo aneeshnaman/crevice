@@ -4,12 +4,12 @@ chrome.runtime.onMessage.addListener(
         chrome.tabs.create({url: request.url});
       } else if (request.cmd == "previous-tab") {
         chrome.tabs.query(
-            { index: sender.tab.index - 1, windowId: sender.tab.windowId },
-            activateTab);
+            { windowId: sender.tab.windowId },
+            createTabActivator(sender.tab.index - 1));
       } else if (request.cmd == "next-tab") {
         chrome.tabs.query(
-            { index: sender.tab.index + 1, windowId: sender.tab.windowId },
-            activateTab);
+            { windowId: sender.tab.windowId },
+            createTabActivator(sender.tab.index + 1));
       } else if (request.cmd == "close-tab") {
         chrome.tabs.remove(sender.tab.id);
       } else if (request.cmd == "reopen-last-closed") {
@@ -37,8 +37,13 @@ chrome.runtime.onMessage.addListener(
       }
     });
 
-function activateTab(tabs) {
-  if (tabs.length > 0) {
-    chrome.tabs.update(tabs[0].id, {active: true});
-  }
+function createTabActivator(requiredIndex) {
+  return function(tabs) {
+    var calculatedIndex = (requiredIndex + tabs.length) % tabs.length;
+    for (var i = 0; i < tabs.length; ++i) {
+      if (tabs[i].index == calculatedIndex) {
+        chrome.tabs.update(tabs[i].id, {active: true});
+      }
+    }
+  };
 }
