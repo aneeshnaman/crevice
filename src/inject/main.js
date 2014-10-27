@@ -24,6 +24,12 @@
  * launch gvim and paste text
  */
 
+EXCLUDE_LIST.forEach(function(pattern) {
+  if (document.URL.match(pattern)) {
+    throw new Error('early exit');
+  }
+});
+
 var gMode = Mode.NORMAL;
 var gSearcher = new Searcher();
 var gCommand = new CommandLine(COMMAND_MAP);

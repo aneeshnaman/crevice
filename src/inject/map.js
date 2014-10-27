@@ -98,3 +98,8 @@ var COMMAND_MAP = {
 var IGNORE_MAP = {
   ".*critique.corp.google.com.*": ["u", "r"]
 };
+
+var EXCLUDE_LIST = [
+  ".*mail.google.com.*",
+  ".*drive.google.com.*"
+];
