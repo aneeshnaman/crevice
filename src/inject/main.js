@@ -1,5 +1,5 @@
 /**
- * TODO
+ * FEATURE TODOS
  *
  * user options page
  *
@@ -25,6 +25,15 @@
  * marks for urls
  *
  * launch gvim and paste text
+ */
+
+/**
+ * CODE TODOS
+ *
+ * move all styling to css
+ * move mode changes to a single place
+ * use kvo to change UI rather than explicit calls to show/hide etc.
+ * split util.js into specific modules.
  */
 
 var Crevice = {};
