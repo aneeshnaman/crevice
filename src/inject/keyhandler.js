@@ -37,12 +37,16 @@ KeyHandler.prototype.handleKey = function(ke, mode) {
     }
   }
 
-  // If url in ignore-map, ignore all keys that match its list
-  for (var pattern in this.ignoreMap) {
-    if (document.URL.match(pattern) &&
-        arrayContains(this.ignoreMap[pattern], id)) {
-      log("This key not enabled for this URL. Ignoring...");
-      return false;
+  // Ignoring keys only makes sense for actions, not when the user is typing in
+  // something like a search/command string.
+  if (!arrayContains([Mode.COMMAND, Mode.INSERT, Mode.SEARCH], mode)) {
+    // If url in ignore-map, ignore all keys that match its list
+    for (var pattern in this.ignoreMap) {
+      if (document.URL.match(pattern) &&
+          arrayContains(this.ignoreMap[pattern], id)) {
+        log("This key not enabled for this URL. Ignoring...");
+        return false;
+      }
     }
   }
 
