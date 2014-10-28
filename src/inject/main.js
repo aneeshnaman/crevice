@@ -52,10 +52,10 @@ function main() {
     }, 100);
   })();
 
-  // Start key handler
+  // Capture all keydowns on the document.
   document.addEventListener("keydown", function(e) {
     Crevice.keyHandler.handleEvent(e, Crevice.mode);
-  });
+  }, true);
 }
 
 var excludeUrl = false;
