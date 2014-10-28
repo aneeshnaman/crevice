@@ -112,10 +112,8 @@ var TAB_KEYS = [
 ];
 
 var ENABLE_MAP = {
-  ".*zazzle.com.*": TAB_KEYS,
   ".*mail.google.com.*": TAB_KEYS,
   ".*drive.google.com.*": TAB_KEYS,
-  ".*sites.google.com.*": TAB_KEYS,
   ".*google.com/calendar.*": TAB_KEYS,
 };
 
