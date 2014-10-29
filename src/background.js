@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener(
-    function(request, sender, response) {
+    function(request, sender, sendResponse) {
       if (request.cmd == "new-tab") {
         chrome.tabs.create({url: request.url, openerTabId: sender.tab.id});
       } else if (request.cmd == "new-bg-tab") {
@@ -53,7 +53,14 @@ chrome.runtime.onMessage.addListener(
         chrome.tabs.move(sender.tab.id, {index: sender.tab.index - 1});
       } else if (request.cmd == "move-tab-after") {
         chrome.tabs.move(sender.tab.id, {index: sender.tab.index + 1});
+      } else if (request.cmd == "get-options") {
+        getComputedOptions(function(data) {
+          sendResponse(data);
+        });
       }
+      // Return true to keep the response channel active. Required for the
+      // async stuff here like getting the user options.
+      return true;
     });
 
 function createTabActivator(requiredIndex) {

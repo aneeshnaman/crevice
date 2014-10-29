@@ -80,7 +80,6 @@ function main(options) {
   }
 }
 
-chrome.storage.sync.get("options", function(data) {
-  main(new Options(data["options"]));
+chrome.runtime.sendMessage({cmd: "get-options"}, function(optionsData) {
+  main(new Options(optionsData));
 });
-

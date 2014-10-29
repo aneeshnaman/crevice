@@ -2,19 +2,56 @@
   <head>
     <title>Crevice options</title>
     <script type="text/javascript" src="options.js"></script>
+    <script type="text/javascript" src="inject/util.js"></script>
+    <style type="text/css">
+      td {
+        vertical-align: top;
+      }
+      h3 {
+        margin-bottom: 5px;
+      }
+      button {
+        background: #4387fd;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        color: white;
+        font-weight: bold;
+        padding: 5px 20px;
+      }
+      textarea {
+        border-radius: 3px;
+      }
+      #options-save, #options-undo {
+        float: right;
+        margin-right: 4px;
+      }
+      #options-undo {
+        background: grey;
+      }
+    </style>
   </head>
   <body bgcolor="#eee">
-    <textarea id="options-text" rows="50" cols="100">
-{
-  "ignore": {
-    ".*critique.corp.google.com.*": ["u", "r"]
-  },
-  "blacklist": [
-    ".*mail.google.com.*"
-  ]
-}
-    </textarea>
-    <br>
-    <button id="options-save">Save</button>
+    <table>
+      <tr>
+        <td>
+          <h3>Default options:</h3>
+          <textarea id="options-default" rows="40" cols="50" disabled>
+          </textarea>
+        </td>
+        <td>
+          <h3>Your settings:</h3>
+          <textarea id="options-user" rows="40" cols="50">
+          </textarea>
+          <br>
+          <button id="options-save">Save</button>
+          <button id="options-undo">Undo</button>
+        </td>
+        <td>
+          <h3>Computed options:</h3>
+          <textarea id="options-computed" rows="40" cols="50" disabled>
+          </textarea>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
