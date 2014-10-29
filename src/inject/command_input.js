@@ -46,6 +46,7 @@ function styleCommandDiv(elem) {
   elem.style.background = "#4387fd";
   elem.style.borderRadius = "2px";
   elem.style.borderWidth = "0";
+  elem.style.padding = "2px 0";
 }
 
 function styleTextBox(elem) {
@@ -55,6 +56,7 @@ function styleTextBox(elem) {
   elem.style.fontSize = "13px";
   elem.style.fontWeight = "bold";
   elem.style.letterSpacing = "0.2px";
+  elem.style.lineHeight = "1.5em";
   elem.style.textShadow = "#666 1px 1px 1px";
 
   elem.style.background = "#4387fd";
