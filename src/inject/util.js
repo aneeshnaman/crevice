@@ -187,10 +187,16 @@ function isUpperCaseChar(c) {
   return c.toUpperCase() == c;
 }
 
+function isObject(o) {
+  return typeof o === 'object' && !(o instanceof Array);
+}
+
 function copyUnsetKeys(from, to) {
   for (var key in from) {
     if (!(key in to)) {
       to[key] = from[key];
+    } else if (isObject(from[key])) {
+      copyUnsetKeys(from[key], to[key]);
     }
   }
   return to;
