@@ -10,7 +10,6 @@
  * search hints in scrollbar
  *
  * hints affinity
- * hints: open in new tab in background
  *
  * b: go to tab using url/title etc.
  *

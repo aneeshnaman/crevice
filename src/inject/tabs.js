@@ -2,6 +2,18 @@ function openNewTab(url) {
   chrome.runtime.sendMessage(null, {cmd: "new-tab", url: url});
 }
 
+function openNewBgTab(url) {
+  chrome.runtime.sendMessage(null, {cmd: "new-bg-tab", url: url});
+}
+
+function openNewTabAfterCurrent(url) {
+  chrome.runtime.sendMessage(null, {cmd: "new-tab-after-current", url: url});
+}
+
+function openNewBgTabAfterCurrent(url) {
+  chrome.runtime.sendMessage(null, {cmd: "new-bg-tab-after-current", url: url});
+}
+
 function previousTab() {
   chrome.runtime.sendMessage(null, {cmd: "previous-tab"});
 }

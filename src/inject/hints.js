@@ -3,7 +3,7 @@ function Hints() {
   this.hintToNodeMap = {};
   this.hintSpans = [];
   this.currentChain = "";
-  this.newWindow = false;
+  this.newTab = false;
   this.rootNode = null;
   this.idGenerator = new HintsIdGenerator(
     ['a', 's', 'd', 'f', 'j', 'k', 'l', 'w', 'e', 'r', 'u', 'i', 'y', 'n']);
@@ -30,10 +30,10 @@ Hints.prototype.scan = function(node) {
   }
 };
 
-Hints.prototype.show = function(newWindow) {
+Hints.prototype.show = function(newTab) {
   this.rescan();
 
-  this.newWindow = newWindow;
+  this.newTab = newTab;
   var inViewport = this.focusableNodes.filter(isNodeInViewport);
   var ids = this.idGenerator.generate(inViewport.length);
   var map = this.hintToNodeMap = mapTogether(ids, inViewport);
@@ -79,11 +79,13 @@ Hints.prototype.hide = function() {
 };
 
 Hints.prototype.handle = function(id) {
-  var currentChain = this.currentChain = this.currentChain + id;
+  this.currentChain += id;
+  var currentChain = this.currentChain.toLowerCase();
 
   if (currentChain in this.hintToNodeMap) {
     this.hide();
-    this.execute(this.hintToNodeMap[currentChain]);
+    this.execute(this.hintToNodeMap[currentChain],
+                 isUpperCaseChar(this.currentChain[0]));
     return true;
   }
 
@@ -112,9 +114,13 @@ Hints.prototype.handle = function(id) {
   return false;
 };
 
-Hints.prototype.execute = function(node) {
-  if (node instanceof HTMLAnchorElement && node.href && this.newWindow) {
-    NEW_TAB(node.href);
+Hints.prototype.execute = function(node, inBackground) {
+  if (node instanceof HTMLAnchorElement && node.href && this.newTab) {
+    if (inBackground) {
+      NEW_BG_TAB_AFTER_CURRENT(node.href);
+    } else {
+      NEW_TAB_AFTER_CURRENT(node.href);
+    }
   } else if (isTextInput(node)) {
     node.focus();
   } else {

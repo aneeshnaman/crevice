@@ -1,7 +1,26 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, response) {
       if (request.cmd == "new-tab") {
-        chrome.tabs.create({url: request.url});
+        chrome.tabs.create({url: request.url, openerTabId: sender.tab.id});
+      } else if (request.cmd == "new-bg-tab") {
+        chrome.tabs.create({
+          url: request.url,
+          active: false,
+          openerTabId: sender.tab.id
+        });
+      } else if (request.cmd == "new-tab-after-current") {
+        chrome.tabs.create({
+          url: request.url,
+          index: sender.tab.index + 1,
+          openerTabId: sender.tab.id
+        });
+      } else if (request.cmd == "new-bg-tab-after-current") {
+        chrome.tabs.create({
+          url: request.url,
+          index: sender.tab.index + 1,
+          active: false,
+          openerTabId: sender.tab.id
+        });
       } else if (request.cmd == "previous-tab") {
         chrome.tabs.query(
             { windowId: sender.tab.windowId },

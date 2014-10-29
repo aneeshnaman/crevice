@@ -182,3 +182,7 @@ function shuffleArray(array) {
 function isScrollable(elem) {
   return isVisible(elem) && elem.scrollHeight > elem.offsetHeight;
 }
+
+function isUpperCaseChar(c) {
+  return c.toUpperCase() == c;
+}
