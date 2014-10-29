@@ -38,13 +38,14 @@
 
 var Crevice = {};
 
-function setup() {
+function setup(options) {
   Crevice.mode = Mode.NORMAL;
   Crevice.searcher = new Searcher();
   Crevice.command = new CommandLine(COMMAND_MAP);
   Crevice.op = new Operator();
   Crevice.hints = new Hints();
-  Crevice.keyHandler = new KeyHandler(ACTION_MAP, IGNORE_MAP, ENABLE_MAP);
+  Crevice.keyHandler = new KeyHandler(
+      options.actionMap, options.ignoreMap, options.enableMap);
 
   Crevice.install = function() {
     log("installing modules");
@@ -67,19 +68,19 @@ function setup() {
   }, true);
 }
 
-function main() {
-  var excludeUrl = arrayAny(BLACKLISTED_URLS, function(pattern) {
+function main(options) {
+  var excludeUrl = arrayAny(options.blacklistedUrls, function(pattern) {
     return document.URL.match(pattern);
   });
 
   if (excludeUrl) {
     log("Skipping this url...");
   } else {
-    chrome.storage.sync.get(null, function(data) {
-      restoreOptions(data);
-      setup();
-    });
+    setup(options);
   }
 }
 
-main();
+chrome.storage.sync.get(null, function(optionsData) {
+  main(new Options(optionsData));
+});
+

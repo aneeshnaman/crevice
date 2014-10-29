@@ -186,3 +186,12 @@ function isScrollable(elem) {
 function isUpperCaseChar(c) {
   return c.toUpperCase() == c;
 }
+
+function copyUnsetKeys(from, to) {
+  for (var key in from) {
+    if (!(key in to)) {
+      to[key] = from[key];
+    }
+  }
+  return to;
+}
