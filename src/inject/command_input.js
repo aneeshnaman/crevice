@@ -41,19 +41,23 @@ function styleCommandDiv(elem) {
   elem.style.position = "fixed";
   elem.style.bottom = "0";
   elem.style.right = "0";
-
-  elem.style.borderTop = "1px solid #aaa";
-  elem.style.background = "#efefef";
   elem.style.zIndex = "99999";
+
+  elem.style.background = "#4387fd";
+  elem.style.borderRadius = "2px";
+  elem.style.borderWidth = "0";
 }
 
 function styleTextBox(elem) {
   elem.style.width = "100%";
 
-  elem.style.color = "#333";
+  elem.style.color = "white";
   elem.style.fontSize = "13px";
+  elem.style.fontWeight = "bold";
+  elem.style.letterSpacing = "0.2px";
+  elem.style.textShadow = "#666 1px 1px 1px";
 
-  elem.style.background = "#efefef";
+  elem.style.background = "#4387fd";
   elem.style.borderWidth = "0";
   elem.style.outline = "0";
   elem.style.padding = "0 5px";
