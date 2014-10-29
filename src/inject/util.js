@@ -15,6 +15,15 @@ function arrayContains(list, elem) {
   return list.indexOf(elem) >= 0;
 }
 
+function arrayAny(list, pred) {
+  for (var i = 0; i < list.length; ++i) {
+    if (pred(list[i])) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function startsWith(str, prefix) {
   return str.indexOf(prefix) == 0;
 }

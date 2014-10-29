@@ -68,11 +68,8 @@ function main() {
   }, true);
 }
 
-var excludeUrl = false;
-BLACKLISTED_URLS.forEach(function(pattern) {
-  if (document.URL.match(pattern)) {
-    excludeUrl = true;
-  }
+var excludeUrl = arrayAny(BLACKLISTED_URLS, function(pattern) {
+  return document.URL.match(pattern);
 });
 
 if (excludeUrl) {
