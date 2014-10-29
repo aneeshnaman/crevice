@@ -17,7 +17,7 @@
   ],
   "background": {
     "scripts": [
-      "src/inject/util.js",
+      "src/util.js",
       "src/background.js",
       "src/options.js"
     ]
@@ -28,7 +28,7 @@
       "matches": ["<all_urls>"],
       "css": [ "src/inject/crevice.css" ],
       "js": [
-        "src/inject/util.js",
+        "src/util.js",
         "src/inject/input_nodes.js",
         "src/inject/actions.js",
         "src/inject/scroll.js",

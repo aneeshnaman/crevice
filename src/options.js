@@ -98,28 +98,8 @@ function getComputedOptions(callback) {
   });
 }
 
-function setUserOptions(optionsData, callback) {
+function saveUserOptions(optionsData, callback) {
   chrome.storage.sync.set({"options": optionsData}, callback);
-}
-
-function saveOptions() {
-  console.log("Saving options");
-  var inputElem = document.getElementById("options-user");
-  var json = inputElem.value;
-  console.log(json);
-  try {
-    var data = JSON.parse(json);
-    inputElem.style.border = "1px solid grey";
-    console.log(data);
-    setUserOptions(data);
-  } catch (e) {
-    console.log("Syntax error");
-    inputElem.style.border = "1px solid red";
-  }
-}
-
-function attachListeners() {
-  document.getElementById("options-save").addEventListener("click", saveOptions);
 }
 
 function setJSONContents(elemId, data) {
@@ -128,15 +108,42 @@ function setJSONContents(elemId, data) {
   }
 }
 
-function setupOptionsPage() {
-  setJSONContents("options-default", __DEFAULT_OPTIONS__);
-  getUserOptions(function(optionsData) {
-    setJSONContents("options-user", optionsData);
-  });
+function resetComputedOptionsText() {
   getComputedOptions(function(optionsData) {
     setJSONContents("options-computed", optionsData);
   });
-  attachListeners();
+}
+
+function resetUserOptionsText() {
+  getUserOptions(function(optionsData) {
+    setJSONContents("options-user", optionsData);
+  });
+  document.getElementById("options-user").style.border = "1px solid grey";
+}
+
+function onSaveOptions() {
+  var inputElem = document.getElementById("options-user");
+  var json = inputElem.value;
+  try {
+    var data = JSON.parse(json);
+    console.log(data);
+    saveUserOptions(data);
+    resetUserOptionsText();
+    resetComputedOptionsText();
+  } catch (e) {
+    console.log("Syntax error");
+    inputElem.style.border = "1px solid red";
+  }
+}
+
+function setupOptionsPage() {
+  setJSONContents("options-default", __DEFAULT_OPTIONS__);
+  resetUserOptionsText();
+  resetComputedOptionsText();
+
+  document.getElementById("options-save").addEventListener("click", onSaveOptions);
+  document.getElementById("options-undo").addEventListener(
+      "click", resetUserOptionsText);
 }
 
 document.addEventListener("DOMContentLoaded", setupOptionsPage);
