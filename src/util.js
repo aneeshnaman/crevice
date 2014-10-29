@@ -192,6 +192,8 @@ function isObject(o) {
 }
 
 function copyUnsetKeys(from, to) {
+  if (!from) return;
+  if (!to) to = {};
   for (var key in from) {
     if (!(key in to)) {
       to[key] = from[key];
