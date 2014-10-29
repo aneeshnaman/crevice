@@ -1,8 +1,6 @@
 /**
  * FEATURE TODOS
  *
- * user options page
- *
  * make commandline t/o more useful, e.g. "define abc" doesn't work.
  *
  * backwards search
