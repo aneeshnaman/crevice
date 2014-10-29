@@ -28,15 +28,6 @@ function startsWith(str, prefix) {
   return str.indexOf(prefix) == 0;
 }
 
-function hasKeyStartingWith(map, prefix) {
-  for (var key in map) {
-    if (startsWith(key, prefix)) {
-      return true;
-    }
-  }
-  return false;
-}
-
 function escapeRegExp(string){
   //return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
   return string.replace(/([\\])/g, "\\$1");
@@ -202,4 +193,14 @@ function copyUnsetKeys(from, to) {
     }
   }
   return to;
+}
+
+function isArrayPrefix(list1, list2) {
+  if (!list1 || !list2) return false;
+  if (!list1.length || !list2.length) return false;
+  if (list1.length > list2.length) return false;
+  for (var i = 0; i < list1.length; ++i) {
+    if (list1[i] != list2[i]) return false;
+  }
+  return true;
 }

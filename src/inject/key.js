@@ -80,10 +80,30 @@ function keyId(ke) {
   return id;
 }
 
+var KEY_SEPARATOR = "_";
+
 function chainId(events) {
-  var KEY_SEPARATOR = "_";
 
   var components = [];
   events.forEach(function(ke) { components.push(keyId(ke)); });
   return components.join(KEY_SEPARATOR);
 }
+
+function isKeyPrefix(chain1, chain2) {
+  if (!chain1 || !chain2) return false;
+
+  var parts1 = chain1.split(KEY_SEPARATOR);
+  var parts2 = chain2.split(KEY_SEPARATOR);
+
+  return isArrayPrefix(parts1, parts2);
+}
+
+function hasKeyStartingWith(map, prefix) {
+  for (var key in map) {
+    if (isKeyPrefix(prefix, key)) {
+      return true;
+    }
+  }
+  return false;
+}
+
