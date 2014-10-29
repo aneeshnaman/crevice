@@ -12,11 +12,13 @@
     "history",
     "tabs",
     "sessions",
+    "storage",
     "<all_urls>"
   ],
   "background": {
-    "scripts": ["src/background.js"]
+    "scripts": ["src/background.js", "src/options.js"]
   },
+  "options_page": "src/options.html",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -38,6 +40,7 @@
         "src/inject/marks.js",
         "src/inject/operator.js",
         "src/inject/map.js",
+        "src/inject/options.js",
         "src/inject/main.js"
       ],
       "run_at": "document_start"

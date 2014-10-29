@@ -38,7 +38,7 @@
 
 var Crevice = {};
 
-function main() {
+function setup() {
   Crevice.mode = Mode.NORMAL;
   Crevice.searcher = new Searcher();
   Crevice.command = new CommandLine(COMMAND_MAP);
@@ -67,12 +67,19 @@ function main() {
   }, true);
 }
 
-var excludeUrl = arrayAny(BLACKLISTED_URLS, function(pattern) {
-  return document.URL.match(pattern);
-});
+function main() {
+  var excludeUrl = arrayAny(BLACKLISTED_URLS, function(pattern) {
+    return document.URL.match(pattern);
+  });
 
-if (excludeUrl) {
-  log("Skipping this url...");
-} else {
-  main();
+  if (excludeUrl) {
+    log("Skipping this url...");
+  } else {
+    chrome.storage.sync.get(null, function(data) {
+      restoreOptions(data);
+      setup();
+    });
+  }
 }
+
+main();
