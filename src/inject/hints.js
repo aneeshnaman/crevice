@@ -35,12 +35,17 @@ Hints.prototype.show = function(newTab) {
 
   this.newTab = newTab;
   var inViewport = this.focusableNodes.filter(isNodeInViewport);
-  var ids = this.idGenerator.generate(inViewport.length);
-  var map = this.hintToNodeMap = mapTogether(ids, inViewport);
+  // If the list of nodes is same as the last time, reuse the map so that we
+  // show the same hint for the same node.
+  if (!arraySame(inViewport, this.inViewport)) {
+    this.inViewport = inViewport;
+    ids = this.idGenerator.generate(inViewport.length);
+    this.hintToNodeMap = mapTogether(ids, inViewport);
+  }
 
   var rootNode = this.rootNode;
   var hintSpans = this.hintSpans = [];
-  ids.forEach(function(id) {
+  for (var id in this.hintToNodeMap) {
     var span = document.createElement("span");
     span.textContent = id.toUpperCase();
     span.className = "hint-span";
@@ -58,14 +63,14 @@ Hints.prototype.show = function(newTab) {
     span.style.position = "fixed";
     span.style.zIndex = "9999";
 
-    var node = map[id];
+    var node = this.hintToNodeMap[id];
 
     span.style.top = node.getBoundingClientRect().top + "px";
     span.style.left = node.getBoundingClientRect().left + "px";
 
     rootNode.appendChild(span);
     hintSpans.push({id: id, span: span});
-  });
+  }
 
   this.currentChain = "";
 };

@@ -7,8 +7,6 @@
  * search history
  * search hints in scrollbar
  *
- * hints affinity
- *
  * b: go to tab using url/title etc.
  *
  * UI hints for current mode: DISABLED, OPERATOR PENDING

@@ -15,6 +15,15 @@ function arrayContains(list, elem) {
   return list.indexOf(elem) >= 0;
 }
 
+function arraySame(list1, list2) {
+  if (!list1 || !list2) return false;
+  if (list1.length != list2.length) return false;
+  for (var i = 0; i < list1.length; ++i) {
+    if (list1[i] != list2[i]) return false;
+  }
+  return true;
+}
+
 function arrayAny(list, pred) {
   for (var i = 0; i < list.length; ++i) {
     if (pred(list[i])) {
