@@ -11,6 +11,6 @@ Commander.prototype.execute = function(command) {
   if (!action) return false;
 
   var args = parts.splice(1);
-  action.apply(this, args);
+  action.call(this, args.join(" "));
   return true;
 }

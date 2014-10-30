@@ -50,11 +50,11 @@ function EXIT_INSERT_MODE() {
   Crevice.mode = Mode.NORMAL;
 }
 
-function LOAD_URL(url) { window.location = fixUrl(url); }
-function NEW_TAB(url) { openNewTab(fixUrl(url)); }
-function NEW_BG_TAB(url) { openNewBgTab(fixUrl(url)); }
-function NEW_TAB_AFTER_CURRENT(url) { openNewTabAfterCurrent(fixUrl(url)); }
-function NEW_BG_TAB_AFTER_CURRENT(url) { openNewBgTabAfterCurrent(fixUrl(url)); }
+function LOAD_URL(url) { window.location = createUrl(url); }
+function NEW_TAB(url) { openNewTab(createUrl(url)); }
+function NEW_BG_TAB(url) { openNewBgTab(createUrl(url)); }
+function NEW_TAB_AFTER_CURRENT(url) { openNewTabAfterCurrent(createUrl(url)); }
+function NEW_BG_TAB_AFTER_CURRENT(url) { openNewBgTabAfterCurrent(createUrl(url)); }
 function PREVIOUS_TAB() { previousTab(); }
 function NEXT_TAB() { nextTab(); }
 function CLOSE_TAB() { closeTab(); }

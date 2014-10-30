@@ -110,11 +110,19 @@ function getFocusableAncestor(node) {
   return null;
 }
 
-function fixUrl(url) {
-  if (startsWith(url, "http://") || startsWith(url, "https://")) {
+function createUrl(url) {
+  if (arrayContains(url, "://")) {
+    // "http://google.com"
     return url;
-  } else {
+  } else if (arrayContains(url, "/")) {
+    // "ms/", "cr/", "ms/foo bar"
+    return "http://" + encodeURI(url);
+  } else if (arrayContains(url, ".") && !arrayContains(url, " ")) {
+    // "google.com"
     return "http://" + url;
+  } else {
+    // "define foo"
+    return "http://www.google.com/#q=" + encodeURIComponent(url);
   }
 }
 
