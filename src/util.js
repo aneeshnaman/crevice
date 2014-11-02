@@ -3,6 +3,15 @@ function log() {
   if (ENABLE_LOGGING) console.log(arguments);
 }
 
+function keys(obj) {
+  if (!obj) return [];
+  var list = [];
+  for (var key in obj) {
+    list.push(key);
+  }
+  return list;
+}
+
 function now() {
   return new Date().getTime();
 }

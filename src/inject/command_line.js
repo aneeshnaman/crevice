@@ -1,6 +1,9 @@
 function CommandLine(commandMap) {
+  this.userInput = "";
+  this.autoCompleteIndex = -1;
   this.command = "";
   this.commander = new Commander(commandMap);
+  this.commandList = keys(commandMap);
   this.commandInput = new CommandInput(":");
 }
 
@@ -9,6 +12,11 @@ CommandLine.prototype.install = function(container) {
 };
 
 CommandLine.prototype.reset = function(command) {
+  this.userInput = command;
+  this.setCommand(command);
+};
+
+CommandLine.prototype.setCommand = function(command) {
   this.command = command;
   this.commandInput.reset(command);
 };
@@ -29,7 +37,24 @@ CommandLine.prototype.execute = function() {
 };
 
 CommandLine.prototype.handleNewCharacter = function(character) {
-  this.reset(this.command + character);
+  if (character == "<tab>") {
+    this.tryAutoComplete();
+  } else {
+    this.autoCompleteIndex = -1;
+    this.reset(this.command + character);
+  }
+};
+
+CommandLine.prototype.tryAutoComplete = function() {
+  for (var i = this.autoCompleteIndex + 1; i < this.commandList.length; ++i) {
+    if (startsWith(this.commandList[i], this.userInput)) {
+      this.autoCompleteIndex = i;
+      this.setCommand(this.commandList[i]);
+      return;
+    }
+  }
+  this.autoCompleteIndex = -1;
+  this.reset(this.userInput);
 };
 
 CommandLine.prototype.handleBackspace = function() {

@@ -9,8 +9,6 @@
  *
  * UI hints for current mode: DISABLED, OPERATOR PENDING
  *
- * cmd-line tab completion
- *
  * follow previous/next links on <</>>
  *
  * y: yank current url or selected link's href or selected text
