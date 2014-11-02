@@ -13,4 +13,5 @@ var COMMAND_MAP = {
   "tabopen": NEW_TAB,
   "reload": RELOAD,
   "reloadAll": RELOAD_ALL,
+  "options": OPEN_OPTIONS,
 };

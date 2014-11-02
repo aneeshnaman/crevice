@@ -165,3 +165,7 @@ function setBodyMarginEm(callback) {
   document.body.style.marginLeft = newMargin;
   document.body.style.marginRight = newMargin;
 }
+
+function OPEN_OPTIONS() {
+  chrome.runtime.sendMessage(null, {cmd: "open-options"});
+}

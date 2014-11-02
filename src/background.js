@@ -57,6 +57,8 @@ chrome.runtime.onMessage.addListener(
         getComputedOptions(function(data) {
           sendResponse(data);
         });
+      } else if (request.cmd == "open-options") {
+        chrome.tabs.create({"url": chrome.extension.getURL("src/options.html")});
       }
       // Return true to keep the response channel active. Required for the
       // async stuff here like getting the user options.
