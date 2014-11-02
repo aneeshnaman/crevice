@@ -59,6 +59,12 @@ chrome.runtime.onMessage.addListener(
         });
       } else if (request.cmd == "open-options") {
         chrome.tabs.create({"url": chrome.extension.getURL("src/options.html")});
+      } else if (request.cmd == "search-history") {
+        chrome.history.search(
+            {text: request.text, maxResults: request.maxResults},
+            function(results) {
+              sendResponse({text: request.text, results: results});
+            });
       }
       // Return true to keep the response channel active. Required for the
       // async stuff here like getting the user options.

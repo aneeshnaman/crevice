@@ -12,7 +12,6 @@ KeyHandler.prototype.handleEvent = function(e, mode) {
   }
   var ke = new KeyEvent(e);
   if (hasKey(ke) && this.handleKey(ke, mode)) {
-    log("stopping propagation");
     e.stopImmediatePropagation();
     e.preventDefault();
   }

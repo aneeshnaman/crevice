@@ -37,7 +37,7 @@ CommandInput.prototype.flashError = function() {
 };
 
 function styleCommandDiv(elem) {
-  elem.style.width = "500px";
+  elem.style.width = "1000px";
   elem.style.position = "fixed";
   elem.style.bottom = "0";
   elem.style.right = "0";
