@@ -38,6 +38,7 @@ function getKey(keyCode, shiftKey) {
     }[keyCode];
   } else {
     return {
+      9: '<TAB>',
       186: ':',
       187: '+',
       188: '<',

@@ -35,6 +35,7 @@
         "src/inject/key.js",
         "src/inject/keyhandler.js",
         "src/inject/hints.js",
+        "src/inject/history_box.js",
         "src/inject/commander.js",
         "src/inject/command_input.js",
         "src/inject/command_line.js",

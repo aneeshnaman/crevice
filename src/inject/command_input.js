@@ -5,8 +5,8 @@ function CommandInput(header) {
   this.textElem.setAttribute("data-crevice", "ignore-for-insert");
   this.boxElem.appendChild(this.textElem);
 
-  styleCommandDiv(this.boxElem);
-  styleTextBox(this.textElem);
+  CommandInput.styleCommandDiv(this.boxElem);
+  CommandInput.styleTextBox(this.textElem);
 
   this.hide();
 }
@@ -36,7 +36,7 @@ CommandInput.prototype.flashError = function() {
   }, 500);
 };
 
-function styleCommandDiv(elem) {
+CommandInput.styleCommandDiv = function(elem) {
   elem.style.width = "1000px";
   elem.style.position = "fixed";
   elem.style.bottom = "0";
@@ -49,7 +49,7 @@ function styleCommandDiv(elem) {
   elem.style.padding = "2px 0";
 }
 
-function styleTextBox(elem) {
+CommandInput.styleTextBox = function(elem) {
   elem.style.width = "100%";
 
   elem.style.color = "white";
