@@ -1,6 +1,6 @@
 function CommandLine(commandMap) {
   this.userInput = "";
-  this.autoCompleteIndex = -1;
+  this.tabIndex = -1;
   this.command = "";
   this.history = [];
   this.historyBox = new HistoryBox();
@@ -16,7 +16,7 @@ CommandLine.prototype.install = function(container) {
 
 CommandLine.prototype.reset = function(command) {
   this.userInput = command;
-  this.autoCompleteIndex = -1;
+  this.tabIndex = -1;
   this.history = [];
   this.historyBox.hide();
   this.setCommand(command);
@@ -104,19 +104,19 @@ CommandLine.prototype.handleHistory = function(response) {
 CommandLine.prototype.tryAutoComplete = function(cycleForward) {
   var openUrlParts = this.getOpenUrlParts(this.command);
   if (openUrlParts && this.history) {
-    cycleForward ? ++this.autoCompleteIndex : --this.autoCompleteIndex;
+    cycleForward ? ++this.tabIndex : --this.tabIndex;
     var len = this.history.length + 1;
-    this.autoCompleteIndex = (this.autoCompleteIndex + len) % len;
-    var completion = this.autoCompleteIndex < len - 1 ?
-        this.history[this.autoCompleteIndex].url :
+    this.tabIndex = (this.tabIndex + len) % len;
+    var completion = this.tabIndex < len - 1 ?
+        this.history[this.tabIndex].url :
         this.getOpenUrlParts(this.userInput).arg;
     this.setCommand(openUrlParts.cmd + " " + completion);
-    this.historyBox.show(this.history, this.autoCompleteIndex);
+    this.historyBox.show(this.history, this.tabIndex);
     return;
   } else {
-    for (var i = this.autoCompleteIndex + 1; i < this.commandList.length; ++i) {
+    for (var i = this.tabIndex + 1; i < this.commandList.length; ++i) {
       if (startsWith(this.commandList[i], this.userInput)) {
-        this.autoCompleteIndex = i;
+        this.tabIndex = i;
         this.setCommand(this.commandList[i]);
         return;
       }
