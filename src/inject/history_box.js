@@ -31,6 +31,8 @@ HistoryBox.styleBox = function(elem) {
   elem.style.right = "0";
   elem.style.zIndex = "99999";
 
+  elem.style.boxSizing = "border-box";
+  elem.style.lineHeight = "1.85em";
   elem.style.whiteSpace = "nowrap";
   elem.style.background = "#eee";
   elem.style.borderRadius = "2px";
