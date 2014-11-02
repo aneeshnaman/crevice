@@ -104,13 +104,15 @@ CommandLine.prototype.handleHistory = function(response) {
 CommandLine.prototype.tryAutoComplete = function(cycleForward) {
   var openUrlParts = this.getOpenUrlParts(this.command);
   if (openUrlParts && this.history) {
-    for (var i = this.autoCompleteIndex + 1; i < this.history.length; ++i) {
-      this.autoCompleteIndex++;
-      this.setCommand(openUrlParts.cmd + " " + this.history[i].url);
-      this.historyBox.show(this.history, i);
-      return;
-    }
-    this.reset(this.userInput);
+    cycleForward ? ++this.autoCompleteIndex : --this.autoCompleteIndex;
+    var len = this.history.length + 1;
+    this.autoCompleteIndex = (this.autoCompleteIndex + len) % len;
+    var completion = this.autoCompleteIndex < len - 1 ?
+        this.history[this.autoCompleteIndex].url :
+        this.getOpenUrlParts(this.userInput).arg;
+    this.setCommand(openUrlParts.cmd + " " + completion);
+    this.historyBox.show(this.history, this.autoCompleteIndex);
+    return;
   } else {
     for (var i = this.autoCompleteIndex + 1; i < this.commandList.length; ++i) {
       if (startsWith(this.commandList[i], this.userInput)) {
