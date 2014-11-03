@@ -93,7 +93,6 @@ CommandLine.prototype.handleHistory = function(response) {
     log("no history");
     return;
   }
-  response.results.forEach(function(res) { log(res.url, res.title); });
   this.history = response.results;
   this.historyBox.show(this.history, -1);
 };

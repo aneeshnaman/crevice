@@ -19,6 +19,7 @@
     "scripts": [
       "src/util.js",
       "src/background.js",
+      "src/history.js",
       "src/options.js"
     ]
   },
