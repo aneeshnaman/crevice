@@ -9,8 +9,7 @@ HistoryCache.MAX_RESULTS = 10000;
 
 HistoryCache.prototype.handleHistoryResults = function(results) {
   this.results = results;
-  console.log(results.length);
-  this.results.forEach(function(r) { console.log(r.url, r.title); });
+  console.log("history size: ", results.length);
 };
 
 var MILLISECS_IN_DAY = 24 * 3600 * 1000;

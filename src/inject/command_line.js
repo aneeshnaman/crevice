@@ -94,7 +94,7 @@ CommandLine.prototype.handleHistory = function(response) {
     return;
   }
   this.history = response.results;
-  this.historyBox.show(this.history, -1);
+  this.historyBox.show(this.history, response.text, -1);
 };
 
 CommandLine.prototype.tryAutoComplete = function(cycleForward) {
@@ -103,11 +103,11 @@ CommandLine.prototype.tryAutoComplete = function(cycleForward) {
     cycleForward ? ++this.tabIndex : --this.tabIndex;
     var len = this.history.length + 1;
     this.tabIndex = (this.tabIndex + len) % len;
+    var userInputArg = this.getOpenUrlParts(this.userInput).arg;
     var completion = this.tabIndex < len - 1 ?
-        this.history[this.tabIndex].url :
-        this.getOpenUrlParts(this.userInput).arg;
+        this.history[this.tabIndex].url : userInputArg;
     this.setCommand(openUrlParts.cmd + " " + completion);
-    this.historyBox.show(this.history, this.tabIndex);
+    this.historyBox.show(this.history, userInputArg, this.tabIndex);
     return;
   } else {
     for (var i = this.tabIndex + 1; i < this.commandList.length; ++i) {

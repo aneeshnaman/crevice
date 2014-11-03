@@ -8,14 +8,35 @@ HistoryBox.prototype.install = function(container) {
   container.appendChild(this.boxElem);
 };
 
-HistoryBox.prototype.show = function(history, selected) {
+HistoryBox.prototype.show = function(history, match, selected) {
   if (!history) return;
   this.boxElem.style.visibility = "visible";
   var innerHTML = [];
   for (var i = 0; i < history.length; ++i) {
     var color = i == selected ? "#4387fd" : "";
-    innerHTML.push("<span style=\"color:" + color + "\"><b>" + history[i].title
-        + "</b> [<em>" + history[i].url + "</em>]</span>");
+    var span = [];
+    span.push("<span style=\"color:" + color + "\">");
+    span.push("<b>");
+    HistoryBox.partsByMatch(history[i].title, match).forEach(function(part) {
+      if (part.match) {
+        span.push("<span style=\"color:#080\">" + part.text + "</span>");
+      } else {
+        span.push(part.text);
+      }
+    });
+    span.push("</b>");
+    span.push(" ");
+    span.push("[<em>");
+    HistoryBox.partsByMatch(history[i].url, match).forEach(function(part) {
+      if (part.match) {
+        span.push("<span style=\"color:#080\">" + part.text + "</span>");
+      } else {
+        span.push(part.text);
+      }
+    });
+    span.push("</em>]");
+    span.push("</span>");
+    innerHTML.push(span.join(""));
   }
   this.boxElem.innerHTML = innerHTML.join("<br>");
 };
@@ -41,4 +62,24 @@ HistoryBox.styleBox = function(elem) {
   elem.style.border = "1px solid #e0e0e0";
   elem.style.borderRadius = "2px";
   elem.style.padding = "0 5px";
+};
+
+HistoryBox.partsByMatch = function(text, match) {
+  if (!match) {
+    return [{text: text, match: false}];
+  }
+
+  var parts = [];
+  while (text) {
+    var start = text.toLowerCase().indexOf(match.toLowerCase());
+    if (start >= 0) {
+      parts.push({text: text.substr(0, start), match: false});
+      parts.push({text: text.substr(start, match.length), match: true});
+      text = text.substr(start + match.length);
+    } else {
+      parts.push({text: text, match: false});
+      break;
+    }
+  }
+  return parts;
 };
