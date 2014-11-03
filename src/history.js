@@ -23,8 +23,8 @@ HistoryCache.prototype.search = function(text, maxResults) {
   });
   results.sort(function(a, b) {
     // more counts win
-    if (a.visitCount < b.visitCount) return -1;
-    if (a.visitCount > b.visitCount) return +1;
+    if (a.visitCount > b.visitCount) return -1;
+    if (a.visitCount < b.visitCount) return +1;
     // recent entries win
     if (a.lastVisitTime > b.lastVisitTime + MILLISECS_IN_DAY) return -1;
     if (a.lastVisitTime < b.lastVisitTime + MILLISECS_IN_DAY) return +1;
