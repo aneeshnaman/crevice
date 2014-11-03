@@ -33,8 +33,12 @@ HistoryBox.styleBox = function(elem) {
 
   elem.style.boxSizing = "border-box";
   elem.style.lineHeight = "1.85em";
+  elem.style.fontSize = "11px";
+  elem.style.textAlign = "left";
   elem.style.whiteSpace = "nowrap";
+  elem.style.color = "#777";
   elem.style.background = "#eee";
+  elem.style.border = "1px solid #e0e0e0";
   elem.style.borderRadius = "2px";
   elem.style.padding = "0 5px";
 };
