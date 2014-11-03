@@ -3,6 +3,13 @@ function log() {
   if (ENABLE_LOGGING) console.log(arguments);
 }
 
+function bind(obj, method) {
+  var me = obj;
+  return function() {
+    method.apply(me, arguments);
+  }
+}
+
 function keys(obj) {
   if (!obj) return [];
   var list = [];

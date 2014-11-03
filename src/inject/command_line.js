@@ -62,16 +62,13 @@ CommandLine.prototype.handleBackspace = function() {
 };
 
 CommandLine.prototype.triggerHistorySearch = function() {
-  var me = this;
   var openUrlParts = this.getOpenUrlParts(this.command);
   if (openUrlParts && openUrlParts.arg.length >= 2) {
     chrome.runtime.sendMessage({
       cmd: "search-history",
       text: openUrlParts.arg,
       maxResults: 20
-    }, function(response) {
-      me.handleHistory(response);
-    });
+    }, bind(this, this.handleHistory));
   }
 };
 
