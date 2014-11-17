@@ -1,7 +1,7 @@
 var __DEFAULT_OPTIONS__ = {
   "blacklist": [],
   "ignore": {
-    ".*critique.corp.google.com.*": ["u", "r"]
+    ".*critique.corp.google.com/#review.*": ["u", "r"]
   },
   "enable": {
   ".*mail.google.com.*": ["Ctrl+H", "Ctrl+L", "Ctrl+<", "Ctrl+>", "g_T", "g_t", "d"],
