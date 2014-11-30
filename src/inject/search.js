@@ -19,31 +19,24 @@ function SearchHighlight() {
 SearchHighlight.prototype.reset = function(matches) {
   if (this.highlights) {
     this.highlights.forEach(function(hl) {
-      var newText = document.createTextNode("");
       var parentElem = hl.span.parentElement;
       if (hl.original != hl.matched && hl.matched != hl.trailing) {
-        newText.textContent = hl.original.textContent + hl.matched.textContent +
+        hl.original.textContent = hl.original.textContent + hl.matched.textContent +
           hl.trailing.textContent;
-        parentElem.insertBefore(newText, hl.original);
-        parentElem.removeChild(hl.original);
         parentElem.removeChild(hl.span);
         parentElem.removeChild(hl.trailing);
       } else if (hl.original != hl.matched) {
-        newText.textContent = hl.original.textContent + hl.matched.textContent;
-        parentElem.insertBefore(newText, hl.original);
-        parentElem.removeChild(hl.original);
+        hl.original.textContent = hl.original.textContent + hl.matched.textContent;
         parentElem.removeChild(hl.span);
       } else if (hl.matched != hl.trailing) {
-        newText.textContent = hl.matched.textContent + hl.trailing.textContent;
-        parentElem.insertBefore(newText, hl.span);
+        hl.original.textContent = hl.matched.textContent + hl.trailing.textContent;
         parentElem.removeChild(hl.span);
         parentElem.removeChild(hl.trailing);
       } else {
-        newText.textContent = hl.matched.textContent;
-        parentElem.insertBefore(newText, hl.span);
+        hl.original.textContent = hl.matched.textContent;
         parentElem.removeChild(hl.span);
       }
-      hl.searchNode.resetFromTextNode(newText);
+      hl.searchNode.resetFromTextNode(hl.original);
     });
   }
 
@@ -86,14 +79,79 @@ SearchHighlight.prototype.reset = function(matches) {
 SearchHighlight.prototype.getHighlightedSpans = function() {
   var spans = [];
   this.highlights.forEach(function(hl) {
-    spans.push(hl.matched);
+    spans.push(hl.span);
   });
   return spans;
 };
 
+SearchHighlight.prototype.setOrange = function() {
+  this.getHighlightedSpans().forEach(function(span) {
+    span.style.background = "orange";
+  });
+};
+
+SearchHighlight.prototype.setYellow = function() {
+  this.getHighlightedSpans().forEach(function(span) {
+    span.style.background = "yellow";
+  });
+};
+
+function SearchHighlightSet() {
+  this.hlSet = [];
+  this.currentMatchIndex = -1;
+}
+
+SearchHighlightSet.prototype.reset = function(matches) {
+  this.hlSet.forEach(function(hl) {
+    hl.reset();
+  });
+
+  var hlSet = this.hlSet = [];
+  this.currentMatchIndex = -1;
+
+  if (matches) {
+    matches.reverse().forEach(function(match) {
+      var hl = new SearchHighlight();
+      hl.reset(match.nodes);
+      hlSet.push(hl);
+    });
+  }
+  this.hlSet = this.hlSet.reverse();
+};
+
+SearchHighlightSet.prototype.showNextMatch = function() {
+  this.hideMatch(this.currentMatchIndex);
+  var len = this.hlSet.length;
+  this.currentMatchIndex = (this.currentMatchIndex + len + 1) % len;
+  this.showMatch(this.currentMatchIndex);
+}
+
+SearchHighlightSet.prototype.showPreviousMatch = function() {
+  this.hideMatch(this.currentMatchIndex);
+  var len = this.hlSet.length;
+  this.currentMatchIndex = (this.currentMatchIndex + len - 1) % len;
+  this.showMatch(this.currentMatchIndex);
+}
+
+SearchHighlightSet.prototype.hideMatch = function(index) {
+  if (index < 0 || index >= this.hlSet.length) return;
+  this.hlSet[index].setYellow();
+};
+
+SearchHighlightSet.prototype.showMatch = function(index) {
+  if (index < 0 || index >= this.hlSet.length) return;
+
+  this.hlSet[index].setOrange();
+  var spans = this.hlSet[index].getHighlightedSpans();
+  if (spans.length > 0) {
+    var parent = spans[0].parentElement;
+    parent.scrollIntoViewIfNeeded();
+  }
+};
+
 function Searcher() {
   this.searchState = new SearchState();
-  this.searchHighlight = new SearchHighlight();
+  this.searchHighlightSet = new SearchHighlightSet();
   this.searchBox = new CommandInput("/");
 
   this.searchNode = null;
@@ -110,7 +168,7 @@ Searcher.prototype.reset = function(pattern) {
   this.searchBox.reset(pattern);
 };
 
-Searcher.prototype.startSearch = function() {
+Searcher.prototype.startSearchMode = function() {
   var s = now();
   this.searchNode = new SearchNode(this.rootNode);
   log("search: ", now() - s);
@@ -118,30 +176,38 @@ Searcher.prototype.startSearch = function() {
   this.searchBox.show();
 };
 
-Searcher.prototype.stopSearch = function() {
-  this.searchHighlight.reset();
-  this.searchBox.hide();
-};
-
-Searcher.prototype.getNextMatches = function() {
+Searcher.prototype.startSearch = function() {
+  // build index
+  var searchIndex = this.searchIndex = [];
   var lastIndex = this.searchState.re.lastIndex;
   do {
     var match = this.searchState.re.exec(this.searchNode.text);
     if (!match) {
       log("NO MATCHES");
-      return null;
+      break;
     }
     log(match.index, match[0]);
     var nodes = this.searchNode.getContainingNodes(match.index, match[0].length);
     if (nodes.length) {
       log(nodes);
-      return {
+      searchIndex.push({
         nodes: nodes,
         match: match[0]
-      };
+      });
     }
   } while (this.searchState.re.lastIndex != lastIndex);
-  return null;
+  log(searchIndex);
+
+  // set highlight
+  this.searchHighlightSet.reset(searchIndex);
+
+  // set main-highglight
+  this.searchHighlightSet.showNextMatch();
+};
+
+Searcher.prototype.clearSearch = function() {
+  this.searchHighlightSet.reset();
+  this.searchBox.hide();
 };
 
 Searcher.prototype.handleNewCharacter = function(character) {
@@ -154,19 +220,9 @@ Searcher.prototype.handleBackspace = function() {
 };
 
 Searcher.prototype.searchNext = function() {
-  this.searchHighlight.reset();
-
-  var matches = this.getNextMatches();
-  if (!matches) return;
-
-  if (matches.nodes.length > 0) {
-    var parent = matches.nodes[0].searchNode.node.parentElement;
-    parent.scrollIntoViewIfNeeded();
-  }
-
-  this.searchHighlight.reset(matches.nodes);
+  this.searchHighlightSet.showNextMatch();
 };
 
 Searcher.prototype.searchBack = function() {
-  // todo: implement
+  this.searchHighlightSet.showPreviousMatch();
 };

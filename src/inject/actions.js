@@ -1,5 +1,7 @@
 function SCROLL_DOWN(ke, id) { scrollBy(0, 100); }
 function SCROLL_UP(ke, id) { scrollBy(0, -100); }
+function SCROLL_LEFT(ke, id) { scrollBy(-100, 0); }
+function SCROLL_RIGHT(ke, id) { scrollBy(100, 0); }
 function SCROLL_TOP(ke, id) { scrollTo(0, 0); }
 function SCROLL_BOTTOM(ke, id) { scrollTo(0, 100000); }
 function PAGE_DOWN(ke, id) { scrollBy(0, 500); }
@@ -11,20 +13,20 @@ function ZOOM_UP() { zoomUp(); }
 function ZOOM_DOWN() { zoomDown(); }
 function ZOOM_DEFAULT() { zoomDefault(); }
 
-function START_SEARCH(ke, id) {
+function START_SEARCH_MODE(ke, id) {
   Crevice.mode = Mode.SEARCH;
+  Crevice.searcher.startSearchMode();
+}
+
+function CLEAR_SEARCH(ke, id) {
+  Crevice.mode = Mode.NORMAL;
+  Crevice.searcher.clearSearch();
+}
+
+function START_SEARCH(ke, id) {
+  Crevice.mode = Mode.NORMAL;
+  Crevice.searcher.clearSearch();
   Crevice.searcher.startSearch();
-}
-
-function STOP_SEARCH(ke, id) {
-  Crevice.mode = Mode.NORMAL;
-  Crevice.searcher.stopSearch();
-}
-
-function STOP_AND_SEARCH_NEXT(ke, id) {
-  Crevice.mode = Mode.NORMAL;
-  Crevice.searcher.stopSearch();
-  Crevice.searcher.searchNext();
 }
 
 function ADD_TO_SEARCH(ke, id) { Crevice.searcher.handleNewCharacter(id); }
