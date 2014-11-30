@@ -152,18 +152,78 @@ SearchHighlightSet.prototype.showMatch = function(index) {
   }
 };
 
+SearchHighlightSet.prototype.getHighlightedSpans = function() {
+  var spans = [];
+  this.hlSet.forEach(function(hl) {
+    spans = spans.concat(hl.getHighlightedSpans());
+  });
+  return spans;
+}
+
+function SearchSideBar() {
+  this.div = document.createElement("div");
+  this.div.style.visibility = "hidden";
+
+  this.div.style.position = "fixed";
+  this.div.style.width = "10px";
+  this.div.style.height = "100%";
+  this.div.style.right = "0";
+  this.div.style.top = "0";
+  this.div.style.zIndex = "99999";
+  this.div.style.background = "#efefef";
+};
+
+SearchSideBar.prototype.install = function(container) {
+  container.appendChild(this.div);
+};
+
+function getOffsetTop(elem) {
+  var offsetTop = 0;
+  do {
+    if (!isNaN(elem.offsetTop)) {
+      offsetTop += elem.offsetTop;
+    }
+  } while(elem = elem.offsetParent);
+  return offsetTop;
+}
+
+SearchSideBar.prototype.show = function(spans) {
+  this.div.style.visibility = "visible";
+
+  var div = this.div;
+  var divHeight = div.clientHeight;
+  var docHeight = document.body.scrollHeight;
+  spans.forEach(function(span) {
+    var spanTop = getOffsetTop(span);
+    var marker = document.createElement("div");
+    marker.style.position = "absolute";
+    marker.style.top = Math.round((spanTop / docHeight) * divHeight) + "px";
+    marker.style.height = "1px";
+    marker.style.width = "100%";
+    marker.style.background = "orange";
+    div.appendChild(marker);
+  });
+};
+
+SearchSideBar.prototype.hide = function() {
+  this.div.style.visibility = "hidden";
+  this.div.innerHTML = "";
+};
+
 function Searcher() {
   this.searchState = new SearchState();
   this.searchHighlightSet = new SearchHighlightSet();
   this.searchBox = new CommandInput("/");
+  this.searchSideBar = new SearchSideBar();
 
   this.searchNode = null;
-  this.rootNode = null;
+  this.container = null;
 }
 
-Searcher.prototype.install = function(rootNode) {
-  this.rootNode = rootNode;
-  this.searchBox.install(rootNode);
+Searcher.prototype.install = function(container) {
+  this.container = container;
+  this.searchBox.install(container);
+  this.searchSideBar.install(container);
 };
 
 Searcher.prototype.reset = function(pattern) {
@@ -173,7 +233,7 @@ Searcher.prototype.reset = function(pattern) {
 
 Searcher.prototype.startSearchMode = function() {
   var s = now();
-  this.searchNode = new SearchNode(this.rootNode);
+  this.searchNode = new SearchNode(this.container);
   log("search: ", now() - s);
   this.reset("");
   this.searchBox.show();
@@ -206,11 +266,14 @@ Searcher.prototype.startSearch = function() {
 
   // set main-highglight
   this.searchHighlightSet.showNextMatch();
+
+  this.searchSideBar.show(this.searchHighlightSet.getHighlightedSpans());
 };
 
 Searcher.prototype.clearSearch = function() {
   this.searchHighlightSet.reset();
   this.searchBox.hide();
+  this.searchSideBar.hide();
 };
 
 Searcher.prototype.handleNewCharacter = function(character) {
