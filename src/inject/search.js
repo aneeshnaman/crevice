@@ -29,11 +29,14 @@ SearchHighlight.prototype.reset = function(matches) {
         hl.original.textContent = hl.original.textContent + hl.matched.textContent;
         parentElem.removeChild(hl.span);
       } else if (hl.matched != hl.trailing) {
+        hl.span.removeChild(hl.original);
         hl.original.textContent = hl.matched.textContent + hl.trailing.textContent;
+        parentElem.insertBefore(hl.original, hl.span);
         parentElem.removeChild(hl.span);
         parentElem.removeChild(hl.trailing);
       } else {
-        hl.original.textContent = hl.matched.textContent;
+        hl.span.removeChild(hl.original);
+        parentElem.insertBefore(hl.original, hl.span);
         parentElem.removeChild(hl.span);
       }
       hl.searchNode.resetFromTextNode(hl.original);
