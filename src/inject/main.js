@@ -48,6 +48,13 @@ function setup(options) {
       window.clearInterval(ID);
       Crevice.install();
     }, 100);
+
+    // Escape any insert mode that the page might be setting on load.
+    // The 1s timeout is heuristic and will not work on all pages. Currently
+    // works for the internal corp sites.
+    window.setTimeout(function() {
+      EXIT_INSERT_MODE();
+    }, 1000);
   })();
 
   // Capture all keydowns on the document.
