@@ -55,6 +55,8 @@ var __DEFAULT_OPTIONS__ = {
       "z_0": "ZOOM_DEFAULT",
       "x_k": "INCREASE_BODY_MARGIN",
       "x_j": "DECREASE_BODY_MARGIN",
+      "]_]": "FOLLOW_NEXT_PAGE",
+      "[_[": "FOLLOW_PREVIOUS_PAGE",
     },
     "search": {
       "Ctrl+[": "STOP_SEARCH",

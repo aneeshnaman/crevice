@@ -126,6 +126,21 @@ function getFocusableAncestor(node) {
   return null;
 }
 
+function isClickable(node) {
+  return (node instanceof HTMLAnchorElement && node.getAttribute("href")) ||
+    node instanceof HTMLButtonElement;
+}
+
+function getClickableAncestor(node) {
+  while (node != document.body) {
+    if (isClickable(node)) {
+      return node;
+    }
+    node = node.parentElement;
+  }
+  return null;
+}
+
 function createUrl(url) {
   if (arrayContains(url, "://")) {
     // "http://google.com"

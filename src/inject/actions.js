@@ -171,3 +171,11 @@ function setBodyMarginEm(callback) {
 function OPEN_OPTIONS() {
   chrome.runtime.sendMessage(null, {cmd: "open-options"});
 }
+
+function FOLLOW_NEXT_PAGE() {
+  followNext();
+}
+
+function FOLLOW_PREVIOUS_PAGE() {
+  followPrevious();
+}

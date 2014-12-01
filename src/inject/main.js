@@ -1,15 +1,11 @@
 /**
  * FEATURE TODOS
  *
- * backwards search
  * search history
- * search hints in scrollbar
  *
  * b: go to tab using url/title etc.
  *
  * UI hints for current mode: DISABLED, OPERATOR PENDING
- *
- * follow previous/next links on <</>>
  *
  * y: yank current url or selected link's href or selected text
  * p/P: open url in clipboard (new tab)
