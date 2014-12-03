@@ -5,9 +5,9 @@ function SearchState() {
 SearchState.prototype.reset = function(pattern) {
   this.pattern = pattern;
   if (startsWith(this.pattern, "\\C")) {
-    this.re = new RegExp(escapeRegExp(this.pattern.substr(2)), "g");
+    this.re = new RegExp(this.pattern.substr(2), "g");
   } else {
-    this.re = new RegExp(escapeRegExp(this.pattern), "gi");
+    this.re = new RegExp(this.pattern, "gi");
   }
   log(pattern, this.re.source);
 };
