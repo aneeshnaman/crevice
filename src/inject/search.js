@@ -4,10 +4,13 @@ function SearchState() {
 
 SearchState.prototype.reset = function(pattern) {
   this.pattern = pattern;
-  if (startsWith(this.pattern, "\\C")) {
-    this.re = new RegExp(this.pattern.substr(2), "g");
-  } else {
-    this.re = new RegExp(this.pattern, "gi");
+  try {
+    if (startsWith(this.pattern, "\\C")) {
+      this.re = new RegExp(this.pattern.substr(2), "g");
+    } else {
+      this.re = new RegExp(this.pattern, "gi");
+    }
+  } catch (e) {
   }
   log(pattern, this.re.source);
 };
@@ -137,12 +140,12 @@ SearchHighlightSet.prototype.showPreviousMatch = function() {
 }
 
 SearchHighlightSet.prototype.hideMatch = function(index) {
-  if (index < 0 || index >= this.hlSet.length) return;
+  if (index < 0 || index >= this.hlSet.length || isNaN(index)) return;
   this.hlSet[index].setYellow();
 };
 
 SearchHighlightSet.prototype.showMatch = function(index) {
-  if (index < 0 || index >= this.hlSet.length) return;
+  if (index < 0 || index >= this.hlSet.length || isNaN(index)) return;
 
   this.hlSet[index].setOrange();
   var spans = this.hlSet[index].getHighlightedSpans();

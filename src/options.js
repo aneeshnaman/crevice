@@ -59,8 +59,8 @@ var __DEFAULT_OPTIONS__ = {
       "[_[": "FOLLOW_PREVIOUS_PAGE",
     },
     "search": {
-      "Ctrl+[": "STOP_SEARCH",
-      "<esc>": "STOP_SEARCH",
+      "Ctrl+[": "CLEAR_SEARCH",
+      "<esc>": "CLEAR_SEARCH",
       "<ret>": "START_SEARCH",
       "<bksp>": "SEARCH_BACKSPACE",
       "PASSTHROUGH": "ADD_TO_SEARCH",
