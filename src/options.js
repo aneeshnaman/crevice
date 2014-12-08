@@ -4,9 +4,9 @@ var __DEFAULT_OPTIONS__ = {
     ".*critique.corp.google.com/#review.*": ["u", "r"]
   },
   "enable": {
-  ".*mail.google.com.*": ["Ctrl+H", "Ctrl+L", "Ctrl+<", "Ctrl+>", "g_T", "g_t", "d"],
-  ".*drive.google.com.*": ["Ctrl+H", "Ctrl+L", "Ctrl+<", "Ctrl+>", "g_T", "g_t", "d"],
-  ".*google.com/calendar.*": ["Ctrl+H", "Ctrl+L", "Ctrl+<", "Ctrl+>", "g_T", "g_t", "d"],
+  ".*mail.google.com.*": ["Alt+h", "Alt+l", "Alt+,", "Alt+.", "g_T", "g_t", "d"],
+  ".*drive.google.com.*": ["Alt+h", "Alt+l", "Alt+,", "Alt+.", "g_T", "g_t", "d"],
+  ".*google.com/calendar.*": ["Alt+h", "Alt+l", "Alt+,", "Alt+.", "g_T", "g_t", "d"],
   },
   "actions": {
     "disabled": {
